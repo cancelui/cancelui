@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="src/output.css">
+  <style>
+    #dark-mode.dark p {
+      color: #ddd;
+      /* heading color */
+    }
+
+    /* Dark mode */
+    #dark-mode.dark {
+      background-color: #030712;
+    }
+
+    #dark-mode.dark h1 {
+      color: #fff;
+      /* heading in dark mode */
+    }
+
+    #dark-mode.dark h3 {
+      color: #fff;
+      /* heading in dark mode */
+    }
+
+    #dark-mode.dark .card {
+      background-color: #1c2029;
+      color: #ddd;
+    }
+
+    #dark-mode.dark .nav {
+      background-color: rgb(0, 94, 255);
+      color: #ddd;
+    }
+
+    #dark-mode.dark .head {
+      color: rgb(0, 94, 255);
+    }
+
+    #dark-mode.dark .para {
+      color: #b5c3e4;
+    }
+
+    #dark-mode.dark #right-sidebar::-webkit-scrollbar-track {
+      background-color: black
+        /* match your sidebar color */
+    }
+  </style>
+
+  <title>Document</title>
+
+</head>
+
+<body id="dark-mode" class="bg-[#f0f2ff] poppins">
+  <!-------------------------------------------------------------- navbar --------------------------------------------------------->
+
+  <section>
+    <!-- laptop size -->
+    <nav class="flex justify-between p-5  w-full shadow-xl bg-white card   ">
+      <div class="w-[100%] justify-around flex items-center space-x-8 ">
+        <!-- lap left -->
+        <div class="flex space-x-3 items-center  ">
+          <img src="images/cui.jpg" alt="" class="size-12">
+          <div
+            class="space-x-10 text-md bg-blue-300 px-6 py-3 rounded-full shadow-lg flex flex-nowrap  max-lg:hidden outline-none nav ">
+            <a href="docs.html">Docs</a>
+            <a href="#">Components</a>
+            <a href="#">Templates</a>
+            <a href="#">Blogs</a>
+          </div>
+          <!-- search input-- -->
+          <!-- Responsive Search Input -->
+          <div class="relative inline-block space-x-3 ">
+            <span class="absolute inset-y-0 left-3 flex items-center text-gray-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.6 3.6a7.5 7.5 0 0013.05 13.05z" />
+              </svg>
+            </span>
+            <input id="searchinput" type="text" placeholder="On Click"
+              class=" card inline-block w-38  pl-10  xl:focus:w-60 md:focus:w-50  transition-all duration-300 ease-in-out px-4 py-2 border border-gray-300 rounded-full shadow-md outline-blue-300 outline-2 " />
+          </div>
+        </div>
+        <!--lap right   -->
+        <div class="space-x-5 text-xl flex items-center card   ">
+          <div class="flex space-x-2   max-lg:hidden ">
+            <img src="images/github.jpg" alt="" class="size-10 object-cover">
+            <img src="images/twitter.jpg" alt="" class="size-10 object-cover">
+          </div>
+          <div class="flex space-x-8">
+            <div class="relative w-[70px] ">
+              <select
+                class="appearance-none rounded-full pl-4 pr-7 py-2 
+                                    bg-blue-300 
+                                    card
+                                    font-medium text-sm 
+                                    shadow cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors duration-300 w-full sm:w-18 border-blue-400  ">
+                <option class="hover:bg-blue-500">v1.0</option>
+                <option class="hover:bg-blue-500">v1.1</option>
+                <option class="hover:bg-blue-500">v2.0</option>
+                <option class="hover:bg-blue-500">v2.5</option>
+                <option class="hover:bg-blue-500">Latest</option>
+              </select>
+              <!-- Custom Arrow -->
+              <svg xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 text-gray-600 dark:text-gray-300 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <!-- Dark Mode Toggle -->
+            <div class="max-lg:hidden items-center ">
+
+
+              <label class="inline-flex items-center cursor-pointer">
+                <input id="darkModeToggle" type="checkbox" value="" class="sr-only peer darkModeToggle">
+                <div
+                  class="relative w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600">
+                </div>
+              </label>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      <button class="lg:hidden text-xl font-bold" onclick="nav()">☰</button>
+    </nav>
+    <!-- mobile view -->
+    <nav id="showmenu" class="hidden lg:hidden card dark ">
+      <div class="flex flex-col space-y-5 shadow-lg p-5 bg-gray-50 ">
+        <a href="docs.html" class="p-5 bg-gray-100 rounded-full card ">Docs</a>
+        <a href="#" class="p-5 bg-gray-100 rounded-full card ">Components</a>
+        <a href="#" class="p-5 bg-gray-100 rounded-full card ">Templates</a>
+        <a href="#" class="p-5 bg-gray-100 rounded-full card ">Blogs</a>
+        <div class="flex space-x-5">
+          <img src="images/github.jpg" alt="" class="size-10 object-cover ">
+          <img src="images/twitter.jpg" alt="" class="size-10 object-cover ">
+        </div>
+        <div class=" items-center">
+
+
+          <label class="inline-flex items-center cursor-pointer">
+            <input id="darkModeToggle" type="checkbox" value="" class="sr-only peer darkModeToggle">
+            <div
+              class="relative w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600">
+            </div>
+          </label>
+
+        </div>
+
+
+      </div>
+    </nav>
+  </section>
+
+  <!---------------------------------------------------------------------- hero section --------------------------------------->
+  <section id="hero" class=" bg-cover bg-center w-full   " style="background-image: url(images/g.png);">
+    <div class="flex justify-center items-center h-[100vh]">
+      <div class="text-center " style="margin-top: -100px;">
+        <h1 class="text-5xl font-bold text-[#013853] lg:text-6xl head mb-3 ">cancelUI</h1>
+        <span class="text-lg mt-5 text-[#013853] lg:text-xl para">"Unleash Limitless Creativity With Zero Setup And <br>
+          Endless Possibilities"</span>
+        <div class="flex  justify-center space-x-3 mt-5">
+          <a
+            class="px-4 py-2 card bg-[#333] rounded-full text-white cursor-pointer hover:scale-110 transform transition-transform duration-300 ">Get
+            Started</a>
+          <a
+            class="px-4 py-2 card hover:bg-[#333]  border border-[#333] text-[#333] rounded-full hover:text-white cursor-pointer  hover:scale-110 transform transition-transform duration-300  ">View
+            Components</a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!------------------------------------- start with cancelUI --------------------------------------------------------------------------->
+  <div class="w-full flex justify-center " id="dark-mode">
+    <div class=" w-[80%] py-24">
+      <h1 class="font-bold text-2xl lg:text-4xl  text-[#005480] mb-5  ">❌Start with
+        CancelUI easily</h1>
+      <span class="text-md lg:text-2xl  text-[#333] para ">Get your framework running in minutes — use CDN,
+        install
+        via
+        npm,
+        or
+        download
+        CancelUI source.
+      </span>
+    </div>
+  </div>
+  <hr class="mb-4 w-2/3 mx-auto " style="color:#ddd;">
+  <!------------------------------------------------ installtion part--------------------------------------------------- -->
+  <section class="poppins">
+    <div class="w-full flex justify-center items-center">
+      <div class="w-[80%] px-5 ">
+        <div>
+          <div class="text-center">
+            <h1 class="text-xl lg:text-3xl font-bold p-4 mb-5 ">Read installation docs</h1>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-x-7 mx-auto     ">
+            <!----------------------------------------------------------------- card 1------------------------------------- -->
+            <div class="bg-[#f8f9fb] p-6  shadow-lg m-1 card "
+              style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1;">
+              <h3 class="font-bold text-[#333] text-xl mt-5 ">⚡Include Via CDN</h3>
+              <p class="text-[#333] text-md p-5 text-md ">
+                Add CancelUI Via CDN And Start Using Ready-Made Components. Instantly-Check The <span
+                  class="font-bold">Quick Start</span> To See Them In Action!.
+              </p>
+              <div
+                class=" justify-between flex items-center border rounded-lg px-1 py-2 bg-[#f3f6f9] border-[#ddd] mt-[55px] ">
+                <span id="cmd" class="text-[#333] text-[13px] ]">
+                  <h4> &lt;link href="https://Cdn-cancelui"> &lt;/link&gt;</h4>
+                </span>
+                <button id="btn" onclick="copy()" class="text-orange-500 text-sm underline cursor-grab">
+                  Copy
+                </button>
+              </div>
+            </div>
+            <!--------------------------------------------------------------------- card 2 ------------------------------------->
+            <div id="dark-element" class="bg-[#f8f9fb]  p-6  shadow-lg lg:scale-110 m-1 card "
+              style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0)) 1; ">
+              <h3 class="font-bold text-[#333] text-xl mt-5 ">👉Install Via NPM</h3>
+              <p class="text-[#333] text-md p-5 text-md ">
+                Add CancelUI Via NPM, CDN or Download Package Install Five Core CSS/JS But Docs And Build Tools Aren't
+                Included.Check Exmaples Demos To See Components In Action.
+              </p>
+              <div class=" justify-between flex items-center border rounded-lg px-4 py-2 bg-[#f3f6f9] border-[#ddd] ">
+                <span id="cmd2" class="text-[#333] text-sm ">Npm install Cancel-Ui@1.0.0</span>
+                <button id="btn2" onclick="copy2()" class="text-orange-500 text-sm underline cursor-grab">
+                  Copy
+                </button>
+              </div>
+
+
+            </div>
+            <!---------------------------------------------------- card 3 ------------------------------------------------------->
+            <div id="dark-element" class="bg-[#f8f9fb]  p-6  shadow-lg m-1 card "
+              style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1 ;">
+              <h3 class="font-bold text-[#333] text-xl mt-5 ">🛞Download Source Code</h3>
+              <p class="text-[#333] text-md p-5 mx-auto text-md ">
+                Access Free CancelUI Component Code And Templates To Use In Your HTML Project. Customize Or Copy
+                Directly For Your Own Designs.
+              </p>
+              <div class="p-5 -mt-8">
+                <a class="text-blue-500 underline" href="#">View Components</a>
+                <h4 class="mt-3 font-bold text-md">Included Files</h4>
+                <div class="flex flex-col underline text-sm  ">
+                  <a href="#" class="text-[#333] card">Cancelui.css</a>
+                  <a href="#" class="text-[#333] card ">Cancelui.js</a>
+                </div>
+                <div>
+                  <h4 class="font-bold text-sm text-end "><a href="#">Examples</a></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!------------------------------------------------------------------ installtion  end --------------------------------------------------->
+
+  <!---------------------------------------------------------------- why choose cancelui ---------------------------------------------------->
+  <div class="w-full flex justify-center ">
+    <div class=" w-[80%] py-24">
+      <div class="">
+        <h1 class="font-bold text-3xl lg:text-5xl ">Why Choose CancelUI</h1>
+        <br>
+        <span class="font-semibold text-xl lg:text-2xl mt-5 para">Build Modern, Responsive, And Customizable UI</span>
+        <br><br>
+        <span class="text-lg lg:text-xl mt-5 para">CancelUI Saves Hours Of Coding With Ready-Made UI Components,
+          Customizable
+          Designs, And Easy Integration Into Any Project.</span>
+      </div>
+    </div>
+  </div>
+  <!------------------------------------------------------------------------------------- end -------------------------------------------- -->
+  <!---------------------------------------------------------------------------------- card priveiw----------------------------------------- -->
+  <div class="flex justify-center w-full  ">
+    <div class="w-[80%] ">
+      <h1 class="font-semibold text-3xl mb-5">Card</h1>
+      <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 mx-auto  gap-x-5">
+        <div class=" bg-blue-100 p-4 rounded-xl m-1 flex items-center justify-center card  ">
+
+          <div class="gap-5 flex">
+
+            <div class="max-w-sm mx-auto bg-white rounded-2xl  ">
+              <img src="https://placehold.co/600x400" alt=""
+                class=" rounded-2xl mx-auto object-cover transform transition-transform duration-300 hover:scale-110  hover:shadow-blue-200 hover:shadow-xl">
+              <div class="p-5 space-y-3 ">
+                <h2 class="font-bold text-xl text-black">Card title</h2>
+                <span class="text-black">Some quick example text to build on the card title.</span>
+                <button class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-lg mt-3">Go
+                  Shomewhere</button>
+              </div>
+            </div>
+
+            <div class="max-w-sm mx-auto bg-white rounded-2xl  max-lg:hidden  ">
+              <img src="https://placehold.co/600x400" alt=""
+                class=" rounded-2xl mx-auto object-cover transform transition-transform duration-300 hover:scale-110  hover:shadow-blue-200 hover:shadow-xl">
+              <div class="p-5 space-y-3 ">
+                <h2 class="font-bold text-xl text-black ">Card title</h2>
+                <span class="text-black ">Some quick example text to build on the card title.</span>
+                <button class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-lg mt-3">Go
+                  Shomewhere</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!---------------------------------------------------------- card code  ---------------------------------------------------------------------->
+        <div class="bg-[#f8f9fb] p-5  m-1 card"
+          style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1 ;">
+          <button id="btn3" class="text-orange-500 flex ml-auto " onclick="copy3()">Copy</button>
+          <pre id="cmd3" class=" text-justify overflow-x-auto">
+            <code class=" w-[50px]  ">
+ &lt;div class=&quot;max-w-sm bg-white rounded-2xl shadow-blue-300 shadow-xl&quot;&gt;
+   &lt;img src=&quot;https://placehold.co/600x400&quot; alt=&quot;&quot;
+   class=&quot;rounded-2xl mx-auto object-cover transform transition-transform duration-300 hover:scale-110
+    hover:shadow-blue-200 hover:shadow-xl&quot;
+   /&gt;
+   &lt;div class=&quot;p-5 space-y-3&quot;&gt;
+   &lt;h2 class=&quot;font-bold text-xl&quot;&gt;
+   Card title
+   &lt;/h2&gt;
+   &lt;p class=&quot;text-[#333]&quot;&gt;
+   Some quick example text to build on the card title.
+   &lt;/p&gt;
+   &lt;button class=&quot;px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-lg&quot;&gt;
+   Go Somewhere
+   &lt;/button&gt;
+   &lt;/div&gt;
+ &lt;/div&gt;
+            </code>
+          </pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!------------------------------------------------------ navbar showcase --------------------------------------------------- -->
+
+  <div class="w-full justify-center flex">
+    <div class="w-[80%]">
+      <h1 class="text-3xl font-semibold  mt-15 mb-3">Navbar</h1>
+      <span class=" dark:text-gray-300 text-lg  lg:text-xl para inline-block  mb-7 mt-2 leading-relaxed">
+        CancelUI saves hours of coding with ready-made UI components,
+        customizable designs, and easy integration into any project.
+      </span>
+      <div class="bg-blue-100 rounded-2xl p-5 card ">
+        <div class="flex justify-between rounded-lg  nav bg-blue-500 text-white p-3  ">
+          <div class="flex space-x-2 items-center">
+            <a href="" class="text-lg">CancelUI</a>
+            <div class=" max-lg:hidden ">
+              <a href="" class="p-4 ">Home</a>
+              <a href="" class="p-4 ">About</a>
+              <a href="" class="p-4 ">Contact Us</a>
+            </div>
+          </div>
+          <div>
+            <button onclick="openmenu()" class="lg:hidden italic">☰</button>
+          </div>
+          <div class="space-x-5 flex items-center max-lg:hidden">
+
+            <a href="" class="bg-blue-700 px-4 py-2 rounded-full">Login</a>
+          </div>
+        </div>
+        <div id="menubar" class="hidden w-full bg-blue-400 text-white p-4 nav space-y-3 lg:hidden">
+          <div class="flex flex-col space-y-3">
+            <a href="#" class="p-1 ">Home</a>
+            <a href="#" class="p-1">About</a>
+            <a href="#" class="p-1">Contact Us</a>
+          </div>
+          <div class="flex flex-col space-y-3">
+            <a href="" class="bg-blue-700 px-4 py-2 rounded-full w-20 ">Login</a>
+          </div>
+        </div>
+        <script>
+          let menu = false
+          openmenu = () => {
+            let menubar = document.getElementById("menubar")
+            menu = !menu
+            if (menu) {
+              menubar.classList.remove('hidden')
+            } else {
+              menubar.classList.add('hidden')
+            }
+          }
+        </script>
+      </div>
+      <!-------------------------------------------------------- navbar code ------------------>
+      <div class="bg-[#f8f9fb] p-5  mt-5 "
+        style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1 ;">
+        <button id="btn5" class="text-orange-500 flex ml-auto " onclick="copy5()">Copy</button>
+        <pre id="cmd5" class=" text-justify overflow-x-auto">
+            <code class=" w-[50px]  ">
+   &lt;div class=&quot;flex justify-between nav bg-blue-500 text-white p-3&quot;&gt;
+    &lt;!-- Left Side --&gt;
+    &lt;div class=&quot;flex space-x-2 items-center&quot;&gt;
+      &lt;a href=&quot;#&quot; class=&quot;text-lg font-bold&quot;&gt;CancelUI&lt;/a&gt;
+      &lt;div class=&quot;max-lg:hidden&quot;&gt;
+        &lt;a href=&quot;#&quot; class=&quot;p-4&quot;&gt;Home&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;p-4&quot;&gt;About&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;p-4&quot;&gt;Contact Us&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Hamburger Icon (Mobile) --&gt;
+    &lt;div&gt;
+      &lt;button onclick=&quot;openmenu()&quot; class=&quot;lg:hidden italic text-2xl&quot;&gt;☰&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Right Side --&gt;
+    &lt;div class=&quot;space-x-5 flex items-center max-lg:hidden&quot;&gt;
+      &lt;a href=&quot;#&quot; class=&quot;bg-blue-700 px-4 py-2 rounded-full&quot;&gt;Login&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Mobile Menu --&gt;
+  &lt;div id=&quot;menubar&quot; class=&quot;hidden w-full bg-blue-400 text-white p-4 nav space-y-3 lg:hidden&quot;&gt;
+    &lt;div class=&quot;flex flex-col space-y-3&quot;&gt;
+      &lt;a href=&quot;#&quot; class=&quot;p-1 &quot;&gt;Home&lt;/a&gt;
+      &lt;a href=&quot;#&quot; class=&quot;p-1 &quot;&gt;About&lt;/a&gt;
+      &lt;a href=&quot;#&quot; class=&quot;p-1 &quot;&gt;Contact Us&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;flex flex-col space-y-3&quot;&gt;
+      &lt;a href=&quot;#&quot; class=&quot;bg-blue-700 px-4 py-2 rounded-full w-20 text-center&quot;&gt;Login&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    let menu = false;
+    function openmenu() {
+      const menubar = document.getElementById(&quot;menubar&quot;);
+      menu = !menu;
+      if (menu) {
+        menubar.classList.remove('hidden');
+      } else {
+        menubar.classList.add('hidden');
+      }
+    }
+  &lt;/script&gt;
+            </code>
+          </pre>
+      </div>
+
+    </div>
+  </div>
+  <!-------------------------------------------------------------- button showcasew----------------------------- -->
+  <div class="flex justify-center w-full ">
+    <div class="w-[80%] ">
+      <div class="text-3xl font-semibold mt-15">
+        <p>What's new in CancelUI ?</p>
+      </div>
+      <div class="text-lg lg:text-xl mt-5 mb-10 ">
+        <span class="inline-block para">
+          Built for the new era - "colors, components, and
+          creativity-reimagined"
+        </span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 mx-auto  gap-x-5">
+        <div class=" bg-blue-100 p-4 rounded-xl m-1 flex items-center justify-center card ">
+
+          <div class="gap-5 flex  ">
+
+            <div class="mt-12 flex flex-col items-center justify-center space-y-6">
+              <button
+                class="px-6 py-3 rounded-2xl bg-white/50 border w-full border-white/50 shadow-md text-gray-800 font-medium hover:bg-white/40 transition">
+                Button
+              </button>
+
+              <button
+                class="px-6 py-3 w-full rounded-2xl text-white font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-lg hover:scale-105 transition">
+                Gradient Button
+              </button>
+
+              <button
+                class="px-6 py-3 w-full rounded-xl bg-black text-white font-semibold relative group overflow-hidden">
+                <span class="absolute inset-0 bg-green-500 blur-md opacity-50 group-hover:opacity-75 transition"></span>
+                <span class="relative">Neon Glow Button</span>
+              </button>
+
+              <button
+                class="flex items-center space-x-2 px-6 py-3 w-full rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold shadow-md hover:scale-105 group">
+                <span class="opacity-70 group-hover:opacity-100 ">Icon Button</span>
+                <i class="mt-1 opacity-60 group-hover:opacity-100 group-hover:w-5 fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+
+          </div>
+        </div>
+        <!---------------------------------------------------------- button code--------------------------------------------------------------->
+        <div class="bg-[#f8f9fb] p-5  m-1 card"
+          style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1 ;">
+          <button id="btn4" class="text-orange-500 flex ml-auto " onclick="copy4()">Copy</button>
+          <pre id="cmd4" class=" text-justify overflow-x-auto">
+            <code class=" w-[50px]  ">
+ &lt;button
+  class="px-6 py-3 rounded-2xl bg-white/50 border border-white/50 shadow-md text-gray-800 font-medium hover:bg-white/40 transition"&gt;
+  Button
+&lt;/button&gt;
+
+&lt;button
+  class="px-6 py-3 rounded-2xl text-white font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-lg hover:scale-105 transition"&gt;
+  Gradient Button
+&lt;/button&gt;
+
+&lt;button
+  class="px-6 py-3 rounded-xl bg-black text-white font-semibold relative group overflow-hidden"&gt;
+  &lt;span
+    class="absolute inset-0 bg-green-500 blur-md opacity-50 group-hover:opacity-75 transition"&gt;
+  &lt;/span&gt;
+  &lt;span class="relative"&gt;Neon Glow Button&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;button
+  class="flex items-center space-x-2 px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold shadow-md hover:scale-105 group"&gt;
+  &lt;span class="opacity-70 group-hover:opacity-100"&gt;Icon Button&lt;/span&gt;
+  &lt;i class="mt-1 opacity-60 group-hover:opacity-100 fa-solid fa-arrow-right"&gt;&lt;/i&gt;
+&lt;/button&gt;
+            </code>
+          </pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!----------------------------------------------------------------------------- Responsive design ------------------------------->
+  <div class="w-full flex justify-center mt-15  ">
+    <div class="w-[80%] ">
+      <div class="font-semibold text-3xl mb-10">
+        <p>Responsive Design</p>
+      </div>
+      <div class="relative group">
+
+        <div
+          class="bg-blue-100 rounded-2xl  mx-auto gap-4 grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 py-25 px-10 hover:bg-black/50 card ">
+          <img src="images/cui.jpg" class="size-100 max-lg:hidden " alt="">
+          <img src="images/cui.jpg" class="size-50 lg:size-100 md:size-100  mx-auto " alt="">
+          <img src="images/cui.jpg" class="size-100 max-lg:hidden  " alt="">
+        </div>
+        <div
+          class="absolute inset-0 bg-black/50 rounded-2xl  flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <span class="text-4xl font-bold bg-gradient-to-t from-white to-orange-500 bg-clip-text text-transparent">
+            Responsive Design
+          </span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!---------------------------------------------------- form ------------------------------------------------>
+  <div class="flex justify-center w-full ">
+    <div class="w-[80%] ">
+
+      <div class="font-semibold text-3xl mt-15">
+        <p>Forms</p>
+      </div>
+      <div class="text-lg lg:text-xl mt-5 mb-10">
+        <span class="inline-block para">"Create forms in a few moments of seconds."</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 mx-auto  gap-x-5">
+        <div class=" bg-blue-100 p-4 rounded-xl m-1 flex items-center justify-center card ">
+
+          <div class="gap-5 flex">
+            <div class="w-full ">
+              <form class="bg-white p-10 rounded-xl shadow-md space-y-6">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800 text-center">Form</h2>
+                <div class="space-y-6">
+                  <!-- Name -->
+                  <div class="relative">
+                    <label class="absolute -top-3 left-4 bg-white px-1 text-gray-700 font-medium text-sm">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your name"
+                      class="w-full px-4 py-3 rounded-xl bg-white/10 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-300 border border-[#ddd]" />
+                  </div>
+
+                  <!-- Email -->
+                  <div class="relative">
+                    <label class="absolute -top-3 left-4 bg-white px-1 text-gray-700 font-medium text-sm">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="xyz@example.com"
+                      class="w-full px-4 py-3 rounded-xl bg-white/10 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-300 border border-[#ddd]" />
+                  </div>
+
+                  <!-- Password -->
+                  <div class="relative">
+                    <label
+                      class="absolute -top-3 left-4 bg-white px-1 text-gray-700 font-medium text-sm">Password</label>
+                    <input type="password" id="Password" name="Password" placeholder="Enter your password"
+                      class="w-full px-4 py-3 rounded-xl bg-white/10  text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-300 border border-[#ddd]" />
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit"
+                  class="relative bg-blue-700 w-full overflow-hidden py-3 rounded-full bg-gradient-to-r from-blue-300 to-blue-700 text-white font-semibold tracking-wide shadow-lg group transform transition-all duration-700 hover:scale-105">
+                  <span
+                    class="absolute inset-0 bg-gradient-to-r from-blue-300 via-blue-500 to-blue-700 translate-x-[-100%] group-hover:translate-x-5 transition-transform duration-700 ease-in-out"></span>
+                  <span class="relative z-10">Submit</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!---------------------------------------------------------- form code----------------------------------------------------------------->
+        <div class="bg-[#f8f9fb] p-5  m-1 card"
+          style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1 ;">
+          <button id="btn3" class="text-orange-500 flex ml-auto " onclick="copy3()">Copy</button>
+          <pre id="cmd3" class=" text-justify overflow-x-auto">
+            <code class=" w-[50px]  ">
+ &lt;form class=&quot;bg-white p-10 rounded-xl shadow-md space-y-6&quot;&gt;
+  &lt;h2 class=&quot;text-2xl font-bold mb-4 text-gray-800 text-center&quot;&gt;Form&lt;/h2&gt;
+  &lt;div class=&quot;space-y-6&quot;&gt;
+    &lt;div class=&quot;relative&quot;&gt;
+      &lt;label class=&quot;absolute -top-3 left-4 bg-white px-1 text-gray-700 font-medium text-sm&quot;&gt;Name&lt;/label&gt;
+      &lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; placeholder=&quot;Enter your name&quot; class=&quot;w-full px-4 py-3 rounded-xl bg-white/10 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 border border-[#ddd]&quot;/&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;relative&quot;&gt;
+      &lt;label class=&quot;absolute -top-3 left-4 bg-white px-1 text-gray-700 font-medium text-sm&quot;&gt;Email&lt;/label&gt;
+      &lt;input type=&quot;email&quot; id=&quot;email&quot; name=&quot;email&quot; placeholder=&quot;xyz@example.com&quot; class=&quot;w-full px-4 py-3 rounded-xl bg-white/10 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 border border-[#ddd]&quot;/&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;relative&quot;&gt;
+      &lt;label class=&quot;absolute -top-3 left-4 bg-white px-1 text-gray-700 font-medium text-sm&quot;&gt;Password&lt;/label&gt;
+      &lt;input type=&quot;password&quot; id=&quot;Password&quot; name=&quot;Password&quot; placeholder=&quot;Enter your password&quot; class=&quot;w-full px-4 py-3 rounded-xl bg-white/10 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 border border-[#ddd]&quot;/&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class=&quot;relative bg-blue-700 w-full overflow-hidden py-3 rounded-full bg-gradient-to-r from-blue-300 to-blue-700 text-white font-semibold tracking-wide shadow-lg group transform transition-all duration-700 hover:scale-105&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+            </code>
+          </pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!----------------------------------------------------------------- footer ------------------------------------------------->
+  <!-- footer -->
+  <section>
+    <footer class=" bottom-0 left-0 w-full bg-[#edf5ff] text-gray-700 py-10 shadow-inner mt-20 card">
+      <div class="flex flex-col items-center text-center space-y-7">
+        <div class="w-full max-w-md">
+
+          <a href="#" class="text-2xl font-semibold mb-2 hover:underline para  ">cancelUI
+            Contributors</a>
+          <div class="border-b w-[90%] mx-auto border-gray-200  mt-4 "></div>
+          <div class="flex justify-center   space-x-5 text-sm">
+          </div>
+        </div>
+        <div class="w-full max-w-md">
+          <h3 class="text-xl font-semibold text-gray-900/70 mb-2">links</h3>
+          <div class="flex flex-wrap justify-center gap-3 text-sm">
+            <a href="#" class="hover:text-gray-600 hover:underline underline-offset-4 focus:outline-none">Doc</a>
+            <a href="#"
+              class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">Components</a>
+            <a href="#" class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">Colors</a>
+            <a href="#" class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">Templates</a>
+            <a href="#" class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">Blogs</a>
+            <a href="#" class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">Showcase</a>
+          </div>
+        </div>
+        <div class="w-full max-w-md">
+          <h3 class="text-xl font-semibold text-gray-900/70 mb-2">cancelUI subscription</h3>
+          <div class="flex flex-wrap justify-center gap-3 text-sm">
+            <a href="#" class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">UI Kits</a>
+            <a href="#" class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">Templates</a>
+            <a href="#" class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">UI Blocks</a>
+            <a href="#" class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">Full
+              Access</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+  <script>
+
+    let darkMode = document.getElementById("dark-mode");
+    let hero = document.getElementById("hero")
+
+    let darkModeToggle = document.getElementById("darkModeToggle");
+
+    darkModeToggle.addEventListener("change", () => {
+      if (darkModeToggle.checked) {
+        // Dark mode
+        darkMode.classList.add("dark")
+        hero.style.backgroundImage = "none"
+
+      } else {
+        // Light mode
+        darkMode.classList.remove("dark")
+        hero.style.backgroundImage = "url(g.png)"
+
+      }
+    });
+
+
+
+
+    // install npm------------------------------------
+    copy = () => {
+      let button = document.getElementById("btn")
+      let text = document.getElementById("cmd").innerText
+      navigator.clipboard.writeText(text);
+      button.innerText = "Copied"
+    }
+    //  intall cdn-------------------------------------
+    copy2 = () => {
+      let button = document.getElementById("btn2")
+      let text = document.getElementById("cmd2").innerText
+      navigator.clipboard.writeText(text);
+      button.innerText = "Copied"
+    }
+    //  card code----------------------------------------
+    copy3 = () => {
+      let button = document.getElementById("btn3")
+      let text = document.getElementById("cmd3").innerText
+      navigator.clipboard.writeText(text);
+      button.innerText = "Copied"
+    }
+    // button ///
+    copy4 = () => {
+      let button = document.getElementById("btn4")
+      let text = document.getElementById("cmd4").innerText
+      navigator.clipboard.writeText(text);
+      button.innerText = "Copied"
+    }
+    //navbar
+    copy5 = () => {
+      let button = document.getElementById("btn5")
+      let text = document.getElementById("cmd5").innerText
+      navigator.clipboard.writeText(text);
+      button.innerText = "Copied"
+    }
+  </script>
+  <script>
+    let search = document.getElementById("searchinput")
+    search.addEventListener("focus", () => {
+      search.placeholder = "Search"
+    })
+
+    search.addEventListener("blur", () => {
+      search.placeholder = "On Click"
+    })
+
+
+    nav = () => {
+      menu = document.getElementById("showmenu")
+      menu.classList.toggle("hidden")
+    }
+
+
+  </script>
+
+
+
+
+</body>
+
+</html>

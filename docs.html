@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="src/output.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+        .glass-card {
+            background: #ffffff;
+            /* Solid white background */
+            border: 1px solid #e2e8f0;
+            /* Light border */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            /* Subtle shadow */
+            transition: none;
+            /* No transition on hover */
+        }
+
+        .glass-card:hover {
+            transform: none;
+            /* No transform on hover */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            /* Maintain subtle shadow */
+            background: #ffffff;
+            /* Maintain solid white background */
+        }
+
+        .code-block {
+            background: #2d3748;
+            /* Darker background for code */
+            border: 1px solid #4a5568;
+            /* Slightly lighter border */
+            font-family: 'JetBrains Mono', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #4299e1;
+            /* Blue line */
+        }
+
+        .demo-grid {
+            background: #e0e7ff;
+            /* Light blue background for demo grid */
+            border: 2px solid #9bb8f0;
+            /* Blue border */
+            backdrop-filter: none;
+            /* No blur */
+            transition: none;
+            /* No transition */
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .demo-grid::before {
+            display: none;
+            /* Remove overlay */
+        }
+
+        .demo-grid:hover {
+            border-color: #9bb8f0;
+            /* Maintain border color */
+            background: #e0e7ff;
+            /* Maintain background */
+            transform: none;
+            /* No transform */
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .demo-item {
+            background: #60a5fa;
+            /* Solid blue for demo items */
+            border: 1px solid #3b82f6;
+            /* Darker blue border */
+            background-clip: padding-box;
+            transition: none;
+            /* No transition */
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: none;
+            /* No blur */
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-item::before,
+        .demo-item::after {
+            display: none;
+            /* Remove all pseudo-elements */
+        }
+
+        .demo-item:hover {
+            transform: none;
+            /* No transform */
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Specific item colors (can be removed if all are solid blue) */
+        .demo-item-1,
+        .demo-item-2,
+        .demo-item-3,
+        .demo-item-4 {
+            background: #60a5fa;
+            /* All blue */
+            animation: none;
+            /* Remove pulse animations */
+        }
+
+
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #4299e1;
+            /* Blue button */
+            border: 1px solid #3182ce;
+            /* Darker blue border */
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: none;
+            /* No transition */
+            backdrop-filter: none;
+            /* No blur */
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .copy-btn:hover {
+            background: #4299e1;
+            /* Maintain blue */
+            transform: none;
+            /* No transform */
+            box-shadow: none;
+            /* No shadow */
+        }
+
+        .copy-btn.copied {
+            background: #38a169;
+            /* Green for copied */
+            border-color: #2f855a;
+        }
+
+        .floating-shapes {
+            display: none;
+            /* Remove floating shapes */
+        }
+
+        .neon-glow {
+            text-shadow: none;
+            /* Remove neon glow */
+        }
+
+        .table-row:hover {
+            background: #f0f4f8;
+            /* Light background on hover for table rows */
+            transform: none;
+            /* No transform */
+            transition: none;
+            /* No transition */
+        }
+
+        .section-title::after {
+            background: linear-gradient(90deg, #4299e1, #63b3ed);
+            /* Blue gradient for title underline */
+        }
+
+        @media (max-width: 768px) {
+            .copy-btn {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 12px;
+                display: block;
+                width: fit-content;
+                margin-left: auto;
+            }
+        }
+    </style>
+
+
+
+    <style>
+        h1 {
+            cursor: default;
+        }
+
+        #dark-mode.dark p {
+            color: #ddd;
+            /* heading color */
+        }
+
+        #dark-mode.dark li {
+            color: white;
+            /* heading color */
+        }
+
+        /* Dark mode */
+        #dark-mode.dark {
+            background-color: #030712;
+        }
+
+        #dark-mode.dark h1 {
+            color: rgb(0, 157, 255)
+                /* heading in dark mode */
+        }
+
+        #dark-mode.dark h3 {
+            color: #fff;
+            /* heading in dark mode */
+        }
+
+        #dark-mode.dark .card {
+            background-color: #1c2029;
+            color: white;
+        }
+
+        #dark-mode.dark .main {
+            background-color: #004bfb0e;
+            color: white;
+        }
+
+        #dark-mode.dark .nav {
+            background-color: rgb(0, 94, 255);
+            color: #ddd;
+        }
+
+        #dark-mode.dark .head {
+            color: rgb(0, 94, 255);
+        }
+
+        #dark-mode.dark .comp {
+            color: #b5c3e4;
+        }
+
+        #dark-mode.dark #right-sidebar::-webkit-scrollbar-track {
+            background-color: black
+                /* match your sidebar color */
+        }
+    </style>
+    </style>
+    <style>
+        .comp:hover {
+            padding: 6px 10px;
+            border-radius: 10px;
+            background-color: #5ea4ef;
+            color: white;
+        }
+
+        .comp {
+            padding: 6px 10px;
+            color: black;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        #right-sidebar::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        #right-sidebar::-webkit-scrollbar-track {
+            background-color: #f0f2ff;
+            /* match your sidebar color */
+        }
+
+        #right-sidebar::-webkit-scrollbar-thumb {
+            background-color: #a0aec0;
+            border-radius: 10px;
+        }
+    </style>
+
+</head>
+
+<body class="poppins" id="dark-mode">
+    <!-- ---------------------------------------------------navbar----------------------------------------------------------------- -->
+    <section>
+        <!-- laptop size -->
+        <nav class="flex justify-between p-5  w-full shadow-xl bg-white card  ">
+            <div class="w-[100%] justify-around flex items-center space-x-8 ">
+                <!-- lap left -->
+                <div class="flex space-x-3 items-center  ">
+                    <img src="images/cui.jpg" alt="" class="size-12 ">
+                    <div
+                        class="space-x-10 text-md bg-blue-300 px-6 py-3 rounded-full shadow-lg flex flex-nowrap  max-lg:hidden outline-none nav ">
+                        <a href="docs.html">Docs</a>
+                        <a href="#">Components</a>
+                        <a href="#">Templates</a>
+                        <a href="#">Blogs</a>
+                    </div>
+                    <!-- search input-- -->
+                    <!-- Responsive Search Input -->
+                    <div class="relative inline-block space-x-3 ">
+                        <span class="absolute inset-y-0 left-3 flex items-center text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.6 3.6a7.5 7.5 0 0013.05 13.05z" />
+                            </svg>
+                        </span>
+                        <input id="searchinput" type="text" placeholder="On Click"
+                            class=" card inline-block w-38  pl-10  xl:focus:w-60 md:focus:w-50  transition-all duration-300 ease-in-out px-4 py-2 border border-gray-300 rounded-full shadow-md outline-blue-300 outline-2 " />
+                    </div>
+                </div>
+                <!--lap right   -->
+                <div class="space-x-5 text-xl flex items-center card   ">
+                    <div class="flex space-x-2   max-lg:hidden ">
+                        <img src="images/github.jpg" alt="" class="size-10 object-cover">
+                        <img src="images/twitter.jpg" alt="" class="size-10 object-cover">
+                    </div>
+                    <div class="flex space-x-8">
+                        <div class="relative w-[70px] ">
+                            <select
+                                class="appearance-none rounded-full pl-4 pr-7 py-2 
+                                    bg-blue-300 
+                                    card
+                                    font-medium text-sm 
+                                    shadow cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors duration-300 w-full sm:w-18 border-blue-400  ">
+                                <option class="hover:bg-blue-500">v1.0</option>
+                                <option class="hover:bg-blue-500">v1.1</option>
+                                <option class="hover:bg-blue-500">v2.0</option>
+                                <option class="hover:bg-blue-500">v2.5</option>
+                                <option class="hover:bg-blue-500">Latest</option>
+                            </select>
+                            <!-- Custom Arrow -->
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4 text-gray-600 dark:text-gray-300 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                        <!-- Dark Mode Toggle -->
+                        <div class="max-lg:hidden items-center ">
+
+
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input id="darkModeToggle" type="checkbox" value="" class="sr-only peer darkModeToggle">
+                                <div
+                                    class="relative w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600">
+                                </div>
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            <button class="lg:hidden text-xl font-bold" onclick="nav1()">☰</button>
+        </nav>
+        <!-- mobile view -->
+        <nav id="showmenu1"
+            class="hidden lg:hidden card dark fixed top-17 -right-5  h-full w-3/4 sm:w-2/4 z-50 overflow-y-auto p-5  ">
+            <div class=" flex-col space-y-5 shadow-lg p-5 bg-gray-50 inline-block ">
+                <h1 class="font-bold uppercase text-[#333]">Getting Started</h1>
+                <ul class="flex flex-col ">
+                    <li class="comp " onclick="loadPage('install')"> Installation</li>
+                    <li class="comp" onclick="loadPage('response')">Responsive Layout Basics</li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+
+    <!-- ---------------------------------------------------navbar end----------------------------------------------------------------- -->
+
+    <div class="w-12/12 flex h-screen ">
+        <!--------------------------------------------- left bar------------------------------------------------------------------------>
+        <div class="w-2.5/12 bg-[#f0f2ff] max-lg:hidden card ">
+            <div class="p-5 flex flex-col overflow-y-auto h-full  " id="right-sidebar">
+                <div class="flex items-center gap-3 mb-5">
+                    <img src="images/cui.jpg" alt="" class="size-9">
+                    <h1 class="font-bold text-2xl text-[#013853]">cancelUI</h1>
+                </div>
+
+                <h1 class="font-bold uppercase text-[#333]">Getting Started</h1>
+                <ul class="flex flex-col ">
+                    <li class="comp " onclick="loadPage('install')"> Installation</li>
+                    <li class="comp" onclick="loadPage('response')">Responsive Layout Basics</li>
+                </ul>
+
+                <h1 class="font-bold uppercase text-[#333] mt-6">Components</h1>
+                <ul class="flex flex-col">
+                    <li class="comp"> Accordin</li>
+                    <li class="comp"> Alert</li>
+                    <li class="comp"> Breadcrumbs</li>
+                    <li class="comp"> Buttons</li>
+                    <li class="comp" onclick="loadPage('card')"> Card</li>
+                    <li class="comp"> Dropdowns</li>
+                    <li class="comp"> Footer</li>
+                    <li class="comp" onclick="loadPage('nav')"> Navbar</li>
+                    <li class="comp"> Nav & Tabs</li>
+                    <li class="comp"> Pop Ups</li>
+                    <li class="comp"> Pagination</li>
+
+                </ul>
+
+                <h1 class="font-bold uppercase text-[#333] mt-6">Forms</h1>
+                <ul class="flex flex-col">
+                    <li class="comp" onclick="loadPage('form')"> Form</li>
+
+                </ul>
+
+
+                <h1 class="font-bold uppercase text-[#333] mt-6">E-Commerce Components</h1>
+
+                <h2 class="font-semibold mt-4">Product Display</h2>
+                <ul class="flex flex-col">
+                    <li class="comp"> Product Card</li>
+                    <li class="comp"> Product Grid</li>
+                    <li class="comp"> Product Detail Page</li>
+                    <li class="comp"> Product Gallery / Quick View</li>
+                </ul>
+
+                <h2 class="font-semibold mt-4">Product Features</h2>
+                <ul class="flex flex-col">
+                    <li class="comp"> Product Filter</li>
+                    <li class="comp"> Product Search</li>
+                    <li class="comp"> Product Comparison</li>
+                    <li class="comp"> Wishlist Button</li>
+                    <li class="comp"> Reviews & Ratings</li>
+                </ul>
+
+                <h2 class="font-semibold mt-4">Cart & Checkout</h2>
+                <ul class="flex flex-col">
+                    <li class="comp"> Shopping Cart</li>
+                    <li class="comp"> Mini Cart / Cart Drawer</li>
+                    <li class="comp"> Cart Item + Quantity Selector</li>
+                    <li class="comp"> Cart Summary</li>
+                    <li class="comp"> Checkout Form</li>
+                    <li class="comp"> Payment Form</li>
+                    <li class="comp"> Shipping Form</li>
+                    <li class="comp"> Order Summary</li>
+                    <li class="comp"> Order Success Page</li>
+                    <li class="comp"> Progress Steps</li>
+                </ul>
+
+                <h1 class="font-bold uppercase text-[#333] mt-6">Admin Panel Components</h1>
+
+                <h2 class="font-semibold mt-4">Admin Tools</h2>
+                <ul class="flex flex-col">
+                    <li class="comp"> User Management</li>
+                    <li class="comp"> Analytics Dashboard</li>
+                    <li class="comp"> Inventory Control</li>
+                    <li class="comp"> Settings Page</li>
+                </ul>
+
+                <h2 class="font-semibold mt-4">Product Management</h2>
+                <ul class="flex flex-col">
+                    <li class="comp"> Product Table (CRUD)</li>
+                    <li class="comp"> Product Form</li>
+                    <li class="comp"> Image Uploader</li>
+                    <li class="comp"> Bulk Actions / Import</li>
+                    <li class="comp"> Category & Variant Manager</li>
+                    <li class="comp"> Price Manager</li>
+                </ul>
+
+                <h2 class="font-semibold mt-4">Order Management</h2>
+                <ul class="flex flex-col">
+                    <li class="comp"> Order Table</li>
+                    <li class="comp"> Order Details & Timeline</li>
+                    <li class="comp"> Order Status</li>
+                    <li class="comp"> Refund Manager</li>
+                </ul>
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+        <!---------------------------------------------------- main content ---------------------------------->
+        <div class="lg:w-8/12  w-full  bg-[#ebeef7] main overflow-y-auto h-full " id="right-sidebar">
+            <div class=" " id="main-content">
+
+                <div class="w-full">
+                    <div class="p-5" id="main-content">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-------------------------------------------------------- right bar---------------- -->
+        <div class="lg:w-2/12 bg-[#f0f2ff] max-lg:hidden card   ">
+            <div class="p-5 flex flex-col overflow-y-auto h-full    ">
+                <a href="" class="font-semibold text-sm italic text-blue-400 ">On this page</a>
+                <hr class="mt-1 text-blue-400 ">
+                <div id="on-this-page" class="text-sm space-y-2 font-semibold mt-5">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!----------------------------------------------------------------- footer ------------------------------------------------->
+    <!-- footer -->
+    <section>
+        <footer class=" bottom-0 left-0 w-full bg-[#edf5ff] text-gray-700 py-10 shadow-inner  card">
+            <div class="flex flex-col items-center text-center space-y-7">
+                <div class="w-full max-w-md">
+
+                    <a href="#" class="text-2xl font-semibold mb-2 hover:underline para  ">cancelUI
+                        Contributors</a>
+                    <div class="border-b w-[90%] mx-auto border-gray-200  mt-4 "></div>
+                    <div class="flex justify-center   space-x-5 text-sm">
+                    </div>
+                </div>
+                <div class="w-full max-w-md">
+                    <h3 class="text-xl font-semibold text-gray-900/70 mb-2">links</h3>
+                    <div class="flex flex-wrap justify-center gap-3 text-sm">
+                        <a href="#"
+                            class="hover:text-gray-600 hover:underline underline-offset-4 focus:outline-none">Doc</a>
+                        <a href="#"
+                            class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">Components</a>
+                        <a href="#"
+                            class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">Colors</a>
+                        <a href="#"
+                            class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">Templates</a>
+                        <a href="#"
+                            class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">Blogs</a>
+                        <a href="#"
+                            class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">Showcase</a>
+                    </div>
+                </div>
+                <div class="w-full max-w-md">
+                    <h3 class="text-xl font-semibold text-gray-900/70 mb-2">cancelUI subscription</h3>
+                    <div class="flex flex-wrap justify-center gap-3 text-sm">
+                        <a href="#"
+                            class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">UI
+                            Kits</a>
+                        <a href="#"
+                            class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">Templates</a>
+                        <a href="#"
+                            class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">UI
+                            Blocks</a>
+                        <a href="#"
+                            class="hover:text-gray-600  hover:underline underline-offset-4 focus:outline-none">Full
+                            Access</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+
+
+    <script>
+        let darkMode = document.getElementById("dark-mode");
+        let hero = document.getElementById("hero")
+
+        let darkModeToggle = document.getElementById("darkModeToggle");
+
+        darkModeToggle.addEventListener("change", () => {
+            if (darkModeToggle.checked) {
+                // Dark mode
+                darkMode.classList.add("dark")
+                hero.style.backgroundImage = "none"
+
+            } else {
+                // Light mode
+                darkMode.classList.remove("dark")
+                hero.style.backgroundImage = "url(g.png)"
+
+            }
+        });
+
+
+        nav1 = () => {
+            menu = document.getElementById("showmenu1")
+            menu.classList.toggle("hidden")
+        }
+    </script>
+
+    <!-- -------------------pages changing script--------------------------------------------- -->
+    <script>
+
+        function loadPage(page) {
+            const display = document.getElementById("main-content")
+            const template = document.getElementById(page + '-content')
+            const onThisPage = document.getElementById("on-this-page");
+
+            display.innerHTML = ""
+            onThisPage.innerHTML = ""
+
+            if (template) {
+
+                const contentClone = document.importNode(template.content, true);
+
+                display.appendChild(contentClone)
+
+                display.querySelectorAll("h1").forEach(h => {
+                    let item = document.createElement("div");
+                    item.textContent = h.textContent;
+                    onThisPage.appendChild(item);
+                });
+
+                localStorage.setItem("lastPage", page);
+            }
+
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const savedPage = localStorage.getItem("lastPage");
+            if (savedPage) {
+                loadPage(savedPage);
+            } else {
+                loadPage("install"); // first-time default
+            }
+        });
+    </script>
+
+    <!-- -------------------introduction Page--------------------------- -->
+
+    <template id="install-content">
+        <div class="p-8">
+            <div class="">
+                <h1 class="text-4xl text-gray-700 font-bold">Get Started with cancelUI</h1>
+                <p class="mt-5 font-semibold text-gray-700">CancelUI is a zero-setup, lightweight UI library
+                    that is
+                    quick,
+                    elegant and usable in only a few of <br> seconds</p>
+
+                <h1 class="mt-5 py-5 text-gray-700 text-3xl font-bold"><span class="text-4xl">⚙️</span>
+                    Installation</h1>
+                <p class="mt-5 text-gray-700 font-semibold">Choose your preferred installation method:</p>
+                <p class="mt-5 text-blue-900 font-semibold">"Set up Cancel UI via CDN for easier projects or
+                    quick demos,
+                    and
+                    begin creating stunning interfaces without any setup."</p>
+                <div class="mt-10">
+                    <h1 class="mb-5 text-3xl text-gray-700 font-semibold">Start Building</h1>
+                    <div class="flex flex-wrap gap-6 mt-10  ">
+                        <button class="bg-blue-300 px-10 py-3 text-start w-55 rounded-2xl">Using
+                            CDN</button>
+                        <button class="bg-blue-300 px-10 py-3 text-start w-55 rounded-2xl">Using
+                            NPM</button>
+                        <button class="bg-blue-300 px-10 py-3 text-start w-55 rounded-2xl">Tailwind
+                            Config</button>
+                    </div>
+                </div>
+
+                <hr class="mt-10">
+            </div>
+
+            <div class="mt-10 text-gray-700 ">
+                <p>"Set up Cancel UI via CDN for easier projects or quick demos, and begin creating stunning
+                    <br><span class="underline"> interfaces without any setup."</span>
+                </p>
+
+                <p class="mt-7">👉Include this inside your index.html:</p>
+
+                <p class="mt-7">Add the CancelUI CDN inside the <span class="font-bold">&lt;head&gt;</span>
+                    tag to
+                    start using pre-built, Customizable Components <br> right away. No setup required - just
+                    plug it
+                    in and build faster. </p>
+
+                <p class="font-bold mt-8">index.html</p>
+                <hr class="mt-3">
+
+                <div
+                    class="bg-[#0d1b24] text-sm rounded-lg p-4 flex justify-between items-center text-white font-mono shadow-md w-full mt-5 overflow-x-auto">
+                    <div>
+                        <span class="text-pink-400">&lt;script </span>
+                        <span class="text-red-400">src=</span>
+                        <span class="text-green-400">"https://cdn.jsdelivr.net/npm/@cancelUI/v.0.1"</span>
+                        <span class="text-pink-400">&gt;&lt;/script&gt;</span>
+                    </div>
+                    <button class="mr-5 bg-gray-800 hover:bg-gray-700 text-gray-200 p-2 rounded-md">
+                        📋
+                    </button>
+                </div>
+
+                <div class="mt-10">
+                    <h1 class="text-2xl font-bold">Usage Examples</h1>
+                    <p class="mt-5">Add the CancelUI CDN inside the <span class="font-bold">&lt;head&gt;</span> tag
+                        to start using pre-buit, Customizable Components right away. No setup required -
+                        just plug
+                        it in and build faster</p>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold mt-10">Basic HTML Example</h1>
+                </div>
+
+                <!-- Title -->
+                <div class="mb-2 mt-10 flex items-center justify-between m-5">
+                    <h2 class="text-black font-semibold text-sm flex items-center  gap-2">
+                        <span class="text-lg">⋖⋗</span> HTML
+                    </h2>
+                    <h2 class="text-black font-semibold text-sm flex items-center  gap-2">
+                        <span class="text-lg">⋖⋗</span> Preview
+                    </h2>
+                </div>
+                <hr class="mb-5">
+                <!-- Code Box -->
+                <!-- Wrapper to force left alignment -->
+                <div class="w-full flex justify-start">
+
+                    <div
+                        class="relative bg-[#0d1117] text-sm font-mono rounded-lg overflow-x-auto shadow-lg border border-gray-700 w-full ">
+
+                        <!-- Copy Button -->
+                        <button
+                            class="absolute top-2 right-2 bg-gray-800 hover:bg-gray-700 text-gray-200 p-2 rounded-md transition">
+                            📋
+                        </button>
+
+                        <!-- Code Area -->
+                        <div class="p-4 overflow-x-auto text-left">
+                            <div id="code" class="whitespace-pre-line leading-relaxed min-w-[600px] ">
+                                <span class=" text-red-400">&lt;!DOCTYPE <span
+                                        class=" text-red-300">html</span>&gt;</span>
+                                <span class="text-red-400">&lt;html&gt;</span>
+                                <span class="text-red-400">&lt;head&gt;</span>
+                                <span class="text-blue-400">&lt;title&gt;</span><span class="text-purple-400">Cancel UI
+                                    Demo</span><span class="text-blue-400">&lt;/title&gt;</span>
+                                <span class="text-red-400">&lt;script</span> <span class="text-red-400">src=</span><span
+                                    class="text-green-400">"https://cdn.jsdelivr.net/npm/cancel-ui@2.1.0/dist/cancel-ui.min.js"</span><span
+                                    class="text-red-400">&gt;&lt;/script&gt;</span>
+                                <span class="text-red-400">&lt;/head&gt;</span>
+                                <span class="text-red-400">&lt;body&gt;</span>
+                                <span class="text-blue-400">&lt;cancel- <span
+                                        class="text-purple-400">button</span></span>
+                                <span class="text-purple-400">variant=</span><span
+                                    class="text-purple-400">"primary"</span><span
+                                    class="text-purple-400">&gt;</span><span
+                                    class="text-purple-400">ClickMe!</span><span
+                                    class="text-blue-400">&lt;/cancel-button&gt;</span>
+                                <span class="text-blue-400">&lt;cancel-card</span> <span
+                                    class="text-purple-400">title=</span><span
+                                    class="text-purple-400">"Welcome"</span><span class="text-purple-400">&gt;</span>
+                                <span class="text-blue-400">&lt;p&gt;</span><span class="text-purple-400">This is your
+                                    first
+                                    Cancel UI
+                                    component!</span><span class="text-blue-400">&lt;/p&gt;</span>
+                                <span class="text-blue-400">&lt;/cancel-card&gt;</span>
+                                <span class="text-blue-400">&lt;cancel-input</span> <span
+                                    class="text-purple-400">label=</span>
+                                <span class="text-green-400">"Your Name"</span>
+                                <span class="text-green-400">placeholder=</span><span class="text-green-400">"Enter
+                                    name"</span><span class="text-blue-400">&gt;&lt;/cancel-input&gt;</span>
+                                <span class="text-red-400">&lt;/body&gt;</span>
+                                <span class="text-red-400">&lt;/html&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+        <div class="mt-20 px-6 text-gray-700">
+            <h1 class="text-center text-3xl font-semibold  mb-8">Why Choose CancelUI?</h1>
+
+            <!-- Grid with clear gaps -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-20  mx-auto ">
+
+                <!-- Card 1 -->
+                <div class="bg-white rounded-xl p-2 h-[110%] shadow-2xl">
+                    <div class="py-12 px-7 rounded-xl bg-orange-100 flex flex-col items-center justify-center ">
+                        <span class="mx-auto text-5xl">⚡</span>
+                        <h2 class="font-semibold text-2xl mt-5 text-center "> Lightning Fast</h2>
+                        <p class="text-2sm text-gray-700 text-center mt-5">Optimized for Performance with
+                            minimal bundle size and tree-shaking support</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-2 h-[110%] shadow-2xl">
+                    <div class="py-12 px-7 rounded-xl bg-green-100 flex flex-col items-center justify-center ">
+                        <span class="mx-auto text-5xl">⚡</span>
+                        <h2 class="font-semibold text-2xl mt-5 text-center "> Highly Customizable</h2>
+                        <p class="text-2sm text-gray-700 text-center mt-5">Extensive theming system with CSS
+                            variables and design tokens.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-2 h-[110%] shadow-2xl">
+                    <div class="py-12 px-7 rounded-xl bg-purple-100 flex flex-col items-center justify-center ">
+                        <span class="mx-auto text-5xl">⚡</span>
+                        <h2 class="font-semibold text-2xl mt-5 text-center "> Lightning Fast</h2>
+                        <p class="text-2sm text-gray-700 text-center mt-5">Responsive components that work
+                            perfectly on all devices and screen</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-2 h-[110%] shadow-2xl">
+                    <div class="py-12 px-7 rounded-xl bg-pink-100 flex flex-col items-center justify-center ">
+                        <span class="mx-auto text-5xl">⚡</span>
+                        <h2 class="font-semibold text-2xl mt-5 text-center "> Dark Mode</h2>
+                        <p class="text-2sm text-gray-700 text-center mt-5">Buit-in dark mode support with
+                            automatic</p>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="mt-[20%] px-10 text-gray-700">
+            <h1 class="text-2xl md:text-3xl font-bold">
+                <span class="mr-5 text-3xl md:text-4xl">👨‍👩‍👧‍👦</span>
+                Community
+            </h1>
+
+            <h2 class="mt-7 text-base md:text-xl font-semibold">
+                Use these resources to stay in touch with CancelUI and
+                <br class="hidden sm:block">
+                receive assistance
+            </h2>
+
+            <ul class="list-disc list-inside space-y-3 mt-5 text-sm md:text-lg">
+                <li>For announcements and updates, check out the CancelUI Blog (link)</li>
+                <li>Use GitHub Discussions to post queries and receive assistance</li>
+                <li>Use GitHub issues & PRs to report bugs or make contributions.</li>
+                <li>Use Discord to communicate with the community.</li>
+                <li>On Stack Overflow, look for implementation assistance (tag cancel-ui).</li>
+            </ul>
+        </div>
+        </div>
+        </div>
+    </template>
+
+    <!-- ------------------------------------------------------responsive page-------------------------------- -->
+
+
+    <template id="response-content">
+        <div class="p-5">
+            <section class="text-gray-800 min-h-screen p-4 sm:p-6 lg:p-8 relative  ">
+                <div class="max-w-7xl mx-auto relative z-10">
+
+
+                    <section class="mb-16">
+                        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 section-title">Grid System</h1>
+                        <div class="glass-card rounded-2xl p-6 sm:p-8">
+                            <h3 class="text-xl font-semibold mb-4 text-blue-700 flex items-center">
+                                <i class="fas fa-th-large mr-3"></i>
+                                Example
+                            </h3>
+                            <p class="text-gray-700 mb-6 leading-relaxed">Use our powerful mobile-first flexbox grid to
+                                build layouts of all shapes and sizes thanks to a twelve column system, five default
+                                responsive tiers, and dozens of predefined classes.</p>
+
+                            <div class="demo-grid rounded-xl p-6 mb-6">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-white">
+                                    <div
+                                        class="demo-item demo-item-1 rounded-lg p-4 text-center text-sm font-medium flex items-center justify-center min-h-[80px] relative">
+                                        <span class="relative z-10"> Col 1</span>
+                                    </div>
+                                    <div
+                                        class="demo-item demo-item-2 rounded-lg p-4 text-center text-sm font-medium flex items-center justify-center min-h-[80px] relative">
+                                        <span class="relative z-10"> Col 2</span>
+                                    </div>
+                                    <div
+                                        class="demo-item demo-item-3 rounded-lg p-4 text-center text-sm font-medium flex items-center justify-center min-h-[80px] relative">
+                                        <span class="relative z-10"> Col 3</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="code-block rounded-xl p-6 relative bg-gray-800 ">
+                                <button class="copy-btn">
+                                    <i class="fas fa-copy mr-2"></i>Copy
+                                </button>
+                                <pre class="text-sm text-green-400 overflow-x-auto" id="grid-example-1"><code>&lt;div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"&gt;
+  &lt;div class="col-span-1"&gt;Col 1&lt;/div&gt;
+  &lt;div class="col-span-1"&gt;Col 2&lt;/div&gt;
+  &lt;div class="col-span-1"&gt;Col 3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="mb-16">
+                        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 section-title">How it Works</h1>
+                        <div class="glass-card rounded-2xl p-6 sm:p-8">
+                            <div class="flex items-center mb-6">
+                                <i class="fas fa-cogs text-2xl text-blue-700 mr-4"></i>
+                                <h3 class="text-xl font-semibold text-blue-700">Grid Architecture</h3>
+                            </div>
+                            <p class="text-gray-700 mb-6 leading-relaxed">Cancel UI's grid system uses CSS Grid and
+                                Flexbox for maximum flexibility:</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <ul class="text-gray-700 space-y-3">
+                                    <li class="flex items-center text-gray-700"><i
+                                            class="fas fa-check-circle text-green-500 mr-3"></i>12-column grid system
+                                    </li>
+                                    <li class="flex items-center text-gray-700"><i
+                                            class="fas fa-check-circle text-green-500 mr-3"></i>Five responsive
+                                        breakpoints</li>
+                                    <li class="flex items-center text-gray-700"><i
+                                            class="fas fa-check-circle text-green-500 mr-3"></i>CSS Grid & Flexbox
+                                        powered</li>
+                                </ul>
+                                <ul class="text-gray-700 space-y-3">
+                                    <li class="flex items-center text-gray-700"><i
+                                            class="fas fa-check-circle text-green-500 mr-3"></i>Mobile-first approach
+                                    </li>
+                                    <li class="flex items-center text-gray-700"><i
+                                            class="fas fa-check-circle text-green-500 mr-3"></i>Flexible gap utilities
+                                    </li>
+                                    <li class="flex items-center text-gray-700"><i
+                                            class="fas fa-check-circle text-green-500 mr-3"></i>Advanced spanning
+                                        options</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="mb-16">
+                        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 section-title">Grid Options</h1>
+                        <div class="glass-card rounded-2xl p-6 sm:p-8">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm">
+                                    <thead>
+                                        <tr class="border-b-2 border-blue-500/50">
+                                            <th class="text-left p-4 text-blue-700 font-semibold">Breakpoint</th>
+                                            <th class="text-left p-4 text-blue-700 font-semibold">Class Prefix</th>
+                                            <th class="text-left p-4 text-blue-700 font-semibold">Dimensions</th>
+                                            <th class="text-left p-4 text-blue-700 font-semibold">Container Width</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-gray-700">
+                                        <tr class="table-row rounded font-lg text-gray-800">
+                                            <td class="p-4"><i class="fas fa-mobile-alt mr-2 text-blue-400"></i>X-Small
+                                            </td>
+                                            <td class="p-4 font-mono">Default</td>
+                                            <td class="p-4">&lt;576px</td>
+                                            <td class="p-4">100%</td>
+                                        </tr>
+                                        <tr class="table-row rounded font-lg text-gray-800">
+                                            <td class="p-4"><i class="fas fa-tablet-alt mr-2 text-green-400"></i>Small
+                                            </td>
+                                            <td class="p-4 font-mono">sm:</td>
+                                            <td class="p-4">≥576px</td>
+                                            <td class="p-4">540px</td>
+                                        </tr>
+                                        <tr class="table-row rounded font-lg text-gray-800">
+                                            <td class="p-4"><i class="fas fa-laptop mr-2 text-yellow-400"></i>Medium
+                                            </td>
+                                            <td class="p-4 font-mono">md:</td>
+                                            <td class="p-4">≥768px</td>
+                                            <td class="p-4">720px</td>
+                                        </tr>
+                                        <tr class="table-row rounded font-lg text-gray-800">
+                                            <td class="p-4"><i class="fas fa-desktop mr-2 text-blue-400"></i>Large</td>
+                                            <td class="p-4 font-mono">lg:</td>
+                                            <td class="p-4">≥1024px</td>
+                                            <td class="p-4">960px</td>
+                                        </tr>
+                                        <tr class="table-row rounded font-lg text-gray-800">
+                                            <td class="p-4"><i class="fas fa-tv mr-2 text-pink-400"></i>X-Large</td>
+                                            <td class="p-4 font-mono">xl:</td>
+                                            <td class="p-4">≥1280px</td>
+                                            <td class="p-4">1140px</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="mb-16">
+                        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 section-title">Auto-layout Columns
+                        </h1>
+                        <div class="glass-card rounded-2xl p-6 sm:p-8">
+                            <h3 class="text-xl font-semibold mb-6 text-blue-700 flex items-center">
+                                <i class="fas fa-equals mr-3"></i>
+                                Equal-width
+                            </h3>
+                            <div class="space-y-6">
+                                <div class="demo-grid rounded-xl p-6">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-white">
+                                        <div
+                                            class="demo-item demo-item-1 rounded-lg p-4 text-center text-sm font-medium flex items-center justify-center min-h-[80px] relative">
+                                            <span class="relative z-10"> 1 of 2</span>
+                                        </div>
+                                        <div
+                                            class="demo-item demo-item-2 rounded-lg p-4 text-center text-sm font-medium flex items-center justify-center min-h-[80px] relative">
+                                            <span class="relative z-10"> 2 of 2</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="demo-grid rounded-xl p-6">
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-white">
+                                        <div
+                                            class="demo-item demo-item-1 rounded-lg p-4 text-center text-sm font-medium flex items-center justify-center min-h-[80px] relative">
+                                            <span class="relative z-10"> 1 of 3</span>
+                                        </div>
+                                        <div
+                                            class="demo-item demo-item-2 rounded-lg p-4 text-center text-sm font-medium flex items-center justify-center min-h-[80px] relative">
+                                            <span class="relative z-10"> 2 of 3</span>
+                                        </div>
+                                        <div
+                                            class="demo-item demo-item-3 rounded-lg p-4 text-center text-sm font-medium flex items-center justify-center min-h-[80px] relative">
+                                            <span class="relative z-10"> 3 of 3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="code-block rounded-xl p-6 relative  mt-6 bg-gray-800">
+                                <button class="copy-btn">
+                                    <i class="fas fa-copy mr-2"></i>Copy
+                                </button>
+                                <pre class="text-sm  text-green-400 overflow-x-auto" id="equal-width-code"><code>&lt;div class="grid grid-cols-1 sm:grid-cols-2 gap-4"&gt;
+  &lt;div&gt;1 of 2&lt;/div&gt;
+  &lt;div&gt;2 of 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="grid grid-cols-1 sm:grid-cols-3 gap-4"&gt;
+  &lt;div&gt;1 of 3&lt;/div&gt;
+  &lt;div&gt;2 of 3&lt;/div&gt;
+  &lt;div&gt;3 of 3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="mb-16">
+                        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 section-title">Setting Column Width
+                        </h1>
+                        <div class="glass-card rounded-2xl p-6 sm:p-8">
+                            <div class="demo-grid rounded-xl p-6 mb-6">
+                                <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                                    <div
+                                        class="demo-item demo-item-1 rounded-lg p-4 text-center text-sm font-medium md:col-span-1 flex items-center justify-center min-h-[80px] relative">
+                                        <span class="relative z-10 text-white"> 1</span>
+                                    </div>
+                                    <div
+                                        class="demo-item demo-item-2 rounded-lg p-4 text-center text-sm font-medium md:col-span-6 flex items-center justify-center min-h-[80px] relative">
+                                        <span class="relative z-10 text-white"> 6 (wider)</span>
+                                    </div>
+                                    <div
+                                        class="demo-item demo-item-4 rounded-lg p-4 text-center text-sm font-medium md:col-span-5 flex items-center justify-center min-h-[80px] relative">
+                                        <span class="relative z-10 text-white"> 5</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="code-block rounded-xl p-6 relative bg-gray-800">
+                                <button class="copy-btn">
+                                    <i class="fas fa-copy mr-2"></i>Copy
+                                </button>
+                                <pre class="text-sm text-green-400 overflow-x-auto" id="column-width-code"><code>&lt;div class="grid grid-cols-1 md:grid-cols-12 gap-4"&gt;
+  &lt;div class="md:col-span-1"&gt;1&lt;/div&gt;
+  &lt;div class="md:col-span-6"&gt;6 (wider)&lt;/div&gt;
+  &lt;div class="md:col-span-5"&gt;5&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="mb-16">
+                        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 section-title">Responsive Examples
+                        </h1>
+                        <div class="glass-card rounded-2xl p-6 sm:p-8">
+                            <h3 class="text-xl font-semibold mb-6 text-blue-700 flex items-center">
+                                <i class="fas fa-mobile-alt mr-3"></i>
+                                Mobile to Desktop
+                            </h3>
+                            <div class="demo-grid rounded-xl p-6 mb-6">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                    <div
+                                        class="demo-item demo-item-1 rounded-lg p-4 text-center text-sm font-medium flex items-center justify-center min-h-[80px] relative">
+                                        <span class="relative z-10 text-white"> Responsive</span>
+                                    </div>
+                                    <div
+                                        class="demo-item demo-item-2 rounded-lg p-4 text-center text-sm font-medium flex items-center justify-center min-h-[80px] relative">
+                                        <span class="relative z-10 text-white"> Grid</span>
+                                    </div>
+                                    <div
+                                        class="demo-item demo-item-3 rounded-lg p-4 text-center text-sm font-medium flex items-center justify-center min-h-[80px] relative">
+                                        <span class="relative z-10 text-white"> System</span>
+                                    </div>
+                                    <div
+                                        class="demo-item demo-item-4 rounded-lg p-4 text-center text-sm font-medium flex items-center justify-center min-h-[80px] relative">
+                                        <span class="relative z-10 text-white"> Demo</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="code-block rounded-xl p-6 relative bg-gray-800">
+                                <button class="copy-btn">
+                                    <i class="fas fa-copy mr-2"></i>Copy
+                                </button>
+                                <pre class="text-sm text-green-400 overflow-x-auto" id="responsive-code"><code>&lt;div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"&gt;
+  &lt;div&gt;Responsive&lt;/div&gt;
+  &lt;div&gt;Grid&lt;/div&gt;
+  &lt;div&gt;System&lt;/div&gt;
+  &lt;div&gt;Demo&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </div>
+
+
+
+                        <br>
+                        <br>
+                        <div class="mb-16">
+                            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 section-title">Advanced Grid
+                                Features</h1>
+                            <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-12">
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4 text-blue-700 flex items-center">
+                                        <i class="fas fa-arrows-alt-h mr-3"></i>
+                                        Column Start / End
+                                    </h3>
+                                    <div class="demo-grid rounded-xl p-6">
+                                        <div class="grid grid-cols-6 gap-4 text-white">
+                                            <div
+                                                class="demo-item demo-item-1 rounded-lg p-4 text-center font-medium col-start-2 col-span-2 min-h-[80px] flex items-center justify-center">
+                                                Col Start 2
+                                            </div>
+                                            <div
+                                                class="demo-item demo-item-2 rounded-lg p-4 text-center font-medium col-end-7 col-span-1 min-h-[80px] flex items-center justify-center">
+                                                Col End 7
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="code-block rounded-xl p-6 relative bg-gray-800">
+                                        <button class="copy-btn"><i class="fas fa-copy mr-2"></i>Copy</button>
+                                        <pre class="text-sm text-green-400 overflow-x-auto"><code>&lt;div class="grid grid-cols-6 gap-4"&gt;
+  &lt;div class="col-start-2 col-span-2"&gt;Col Start 2&lt;/div&gt;
+  &lt;div class="col-end-7 col-span-1"&gt;Col End 7&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4 text-blue-700 flex items-center">
+                                        <i class="fas fa-th-large mr-3"></i>
+                                        Nested Grids
+                                    </h3>
+                                    <div class="demo-grid rounded-xl p-6">
+                                        <div class="grid grid-cols-2 gap-4 text-white ">
+                                            <div
+                                                class="demo-item demo-item-1 p-4 flex items-center justify-center min-h-[80px]">
+                                                Parent 1</div>
+                                            <div class="demo-item demo-item-2 p-4 min-h-[80px] bg-blue-300">
+                                                <div class="grid grid-cols-2 gap-2">
+                                                    <div
+                                                        class="demo-item demo-item-3 p-2 flex items-center justify-center min-h-[40px]">
+                                                        Child 1</div>
+                                                    <div
+                                                        class="demo-item demo-item-4 p-2 flex items-center justify-center min-h-[40px]">
+                                                        Child 2</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="code-block rounded-xl p-6 relative bg-gray-800">
+                                        <button class="copy-btn"><i class="fas fa-copy mr-2"></i>Copy</button>
+                                        <pre class="text-sm text-green-400 overflow-x-auto"><code>&lt;div class="grid grid-cols-2 gap-4"&gt;
+  &lt;div&gt;Parent 1&lt;/div&gt;
+  &lt;div&gt;
+    &lt;div class="grid grid-cols-2 gap-2"&gt;
+      &lt;div&gt;Child 1&lt;/div&gt;
+      &lt;div&gt;Child 2&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4 text-blue-700 flex items-center">
+                                        <i class="fas fa-arrows-alt-v mr-3"></i>
+                                        Row Span
+                                    </h3>
+                                    <div class="demo-grid rounded-xl p-6">
+                                        <div class="grid grid-cols-4 gap-4 text-white">
+                                            <div
+                                                class="demo-item demo-item-1 p-4 text-center row-span-2 flex items-center justify-center min-h-[80px]">
+                                                Row Span 2</div>
+                                            <div
+                                                class="demo-item demo-item-2 p-4 text-center flex items-center justify-center min-h-[80px]">
+                                                1</div>
+                                            <div
+                                                class="demo-item demo-item-3 p-4 text-center flex items-center justify-center min-h-[80px]">
+                                                2</div>
+                                            <div
+                                                class="demo-item demo-item-4 p-4 text-center flex items-center justify-center min-h-[80px]">
+                                                3</div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="code-block rounded-xl p-6 relative bg-gray-800">
+                                        <button class="copy-btn"><i class="fas fa-copy mr-2"></i>Copy</button>
+                                        <pre class="text-sm text-green-400 overflow-x-auto"><code>&lt;div class="grid grid-cols-4 gap-4"&gt;
+  &lt;div class="row-span-2"&gt;Row Span 2&lt;/div&gt;
+  &lt;div&gt;1&lt;/div&gt;
+  &lt;div&gt;2&lt;/div&gt;
+  &lt;div&gt;3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4 text-blue-700 flex items-center">
+                                        <i class="fas fa-arrows-alt mr-3"></i>
+                                        Gap Variations
+                                    </h3>
+                                    <div class="demo-grid rounded-xl p-6">
+                                        <div class="grid grid-cols-3 gap-1 text-white mb-4">
+                                            <div class="demo-item p-4 text-center">Gap 1</div>
+                                            <div class="demo-item p-4 text-center">Gap 1</div>
+                                            <div class="demo-item p-4 text-center">Gap 1</div>
+                                        </div>
+                                        <div class="grid grid-cols-3 gap-4 text-white">
+                                            <div class="demo-item p-4 text-center">Gap 4</div>
+                                            <div class="demo-item p-4 text-center">Gap 4</div>
+                                            <div class="demo-item p-4 text-center">Gap 4</div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="code-block rounded-xl p-6 relative bg-gray-800">
+                                        <button class="copy-btn"><i class="fas fa-copy mr-2"></i>Copy</button>
+                                        <pre class="text-sm text-green-400 overflow-x-auto"><code>&lt;div class="grid grid-cols-3 gap-1"&gt;...&lt;/div&gt;
+&lt;div class="grid grid-cols-3 gap-4"&gt;...&lt;/div&gt;</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4 text-blue-700 flex items-center">
+                                        <i class="fas fa-arrows-alt mr-3"></i>
+                                        Alignment & Justify
+                                    </h3>
+                                    <div class="demo-grid rounded-xl p-6">
+                                        <div
+                                            class="grid grid-cols-3 h-32 gap-4 text-white justify-items-center items-center text-center">
+                                            <div class="demo-item p-4">Centered</div>
+                                            <div class="demo-item p-4">Centered</div>
+                                            <div class="demo-item p-4">Centered</div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="code-block rounded-xl p-6 relative bg-gray-800">
+                                        <button class="copy-btn"><i class="fas fa-copy mr-2"></i>Copy</button>
+                                        <pre
+                                            class="text-sm text-green-400 overflow-x-auto"><code>&lt;div class="grid grid-cols-3 justify-items-center items-center"&gt;...&lt;/div&gt;</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4 text-blue-700 flex items-center">
+                                        <i class="fas fa-border-all mr-3"></i>
+                                        Explicit Rows
+                                    </h3>
+                                    <div class="demo-grid rounded-xl p-6">
+                                        <div class="grid grid-rows-3 gap-4 text-white h-64">
+                                            <div class="demo-item p-4 text-center">Row 1</div>
+                                            <div class="demo-item p-4 text-center">Row 2</div>
+                                            <div class="demo-item p-4 text-center">Row 3</div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="code-block rounded-xl p-6 relative bg-gray-800">
+                                        <button class="copy-btn"><i class="fas fa-copy mr-2"></i>Copy</button>
+                                        <pre
+                                            class="text-sm text-green-400 overflow-x-auto"><code>&lt;div class="grid grid-rows-3 gap-4"&gt;...&lt;/div&gt;</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4 text-blue-700 flex items-center">
+                                        <i class="fas fa-expand-arrows-alt mr-3"></i>
+                                        Container vs Full-width
+                                    </h3>
+                                    <div class="demo-grid rounded-xl p-6">
+                                        <div class="container mx-auto grid grid-cols-3 gap-4 text-white mb-4">
+                                            <div class="demo-item p-4 text-center">Container 1</div>
+                                            <div class="demo-item p-4 text-center">Container 2</div>
+                                            <div class="demo-item p-4 text-center">Container 3</div>
+                                        </div>
+                                        <div class="grid grid-cols-3 gap-4 text-white">
+                                            <div class="demo-item p-4 text-center">Full-width 1</div>
+                                            <div class="demo-item p-4 text-center">Full-width 2</div>
+                                            <div class="demo-item p-4 text-center">Full-width 3</div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="code-block rounded-xl p-6 relative bg-gray-800">
+                                        <button class="copy-btn"><i class="fas fa-copy mr-2"></i>Copy</button>
+                                        <pre class="text-sm text-green-400 overflow-x-auto"><code>&lt;div class="container mx-auto grid grid-cols-3 gap-4"&gt;...&lt;/div&gt;
+&lt;div class="grid grid-cols-3 gap-4"&gt;...&lt;/div&gt;</code></pre>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </section>
+                </div>
+
+            </section>
+
+
+
+
+        </div>
+    </template>
+
+    <!-- --------------------------------------------------------------components--------------------------------------------- -->
+
+    <!-- ---------------------------------------------------------------card---------------------------------------- -->
+    <template id="card-content">
+        <div class="p-8 ">
+            <h1 class="text-4xl text-gray-700 font-bold">Card</h1>
+            <p class="mt-5 text-xl  text-gray-700">
+                The CancelUI Card allows developers to manage visual complexity at scale, turning crowded pages into
+                coherent, segmented systems.
+            </p>
+
+            <h1 class="text-2xl text-gray-700 font-bold mt-8 mb-5 ">Example</h1>
+
+            <div class="bg-blue-100 rounded-2xl p-5 card flex gap-10 justify-center  ">
+                <div class="max-w-86 bg-white rounded-2xl shadow-blue-300 shadow-xl">
+                    <img src="https://placehold.co/600x400" alt="" class="rounded-2xl mx-auto object-cover transform transition-transform duration-300 hover:scale-110
+    hover:shadow-blue-200 hover:shadow-xl" />
+                    <div class="p-5 space-y-3">
+                        <h2 class="font-bold text-xl">
+                            Card title
+                        </h2>
+                        <p class="text-[#333]">
+                            Some quick example text to build on the card title.
+                        </p>
+                        <button class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-lg">
+                            Go Somewhere
+                        </button>
+                    </div>
+                </div>
+
+                <div class="max-w-86 bg-white rounded-2xl shadow-blue-300 shadow-xl">
+                    <img src="https://placehold.co/600x400" alt="" class="rounded-2xl mx-auto object-cover transform transition-transform duration-300 hover:scale-110
+    hover:shadow-blue-200 hover:shadow-xl" />
+                    <div class="p-5 space-y-3">
+                        <h2 class="font-bold text-xl">
+                            Card title
+                        </h2>
+                        <p class="text-[#333]">
+                            Some quick example text to build on the card title.
+                        </p>
+                        <button class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-lg">
+                            Go Somewhere
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-------------------------------------------------------- card code ------------------>
+            <div class="bg-[#f8f9fb] p-5  mt-5 "
+                style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1 ;">
+                <button id="btn5" class="text-orange-500 flex ml-auto " onclick="copy5()">Copy</button>
+                <pre id="cmd5" class=" text-justify overflow-x-auto">
+            <code class=" w-[50px]  ">
+   &lt;div class=&quot;max-w-sm bg-white rounded-2xl shadow-blue-300 shadow-xl&quot;&gt;
+   &lt;img src=&quot;https://placehold.co/600x400&quot; alt=&quot;&quot;
+   class=&quot;rounded-2xl mx-auto object-cover transform transition-transform duration-300 hover:scale-110
+    hover:shadow-blue-200 hover:shadow-xl&quot;
+   /&gt;
+   &lt;div class=&quot;p-5 space-y-3&quot;&gt;
+   &lt;h2 class=&quot;font-bold text-xl&quot;&gt;
+   Card title
+   &lt;/h2&gt;
+   &lt;p class=&quot;text-[#333]&quot;&gt;
+   Some quick example text to build on the card title.
+   &lt;/p&gt;
+   &lt;button class=&quot;px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-lg&quot;&gt;
+   Go Somewhere
+   &lt;/button&gt;
+   &lt;/div&gt;
+ &lt;/div&gt;
+            </code>
+          </pre>
+            </div>
+
+            <h1 class="text-2xl text-gray-700 font-bold mt-8  ">About</h1>
+            <span class=" dark:text-gray-300 text-md mt-2 para inline-block  mb-10 italic  leading-relaxed">
+                The CancelUI Card is your unified, foundational container,
+                designed to be the single, extensible replacement for
+                older, fragmented elements like panels and wells. It provides a flexible wrapper for any
+                content—including
+                dedicated headers and footers—allowing you to quickly define a section's contextual importance and
+                maintain
+                a clean, modern architecture with minimal effort.
+            </span>
+
+        </div>
+    </template>
+
+    <!-- --------------------------------------------------navbar------------------------------------------------------- -->
+    <template id="nav-content">
+        <div class="p-8 ">
+            <h1 class="text-4xl text-gray-700 font-bold">Navbar</h1>
+            <p class="mt-5 text-xl  text-gray-700">
+                The CancelUI Navbar allows developers to master responsive complexity at scale, transforming cluttered
+                header regions into a single, fluid, and context-aware system.
+            </p>
+
+            <h1 class="text-2xl text-gray-700 font-bold mt-8 mb-5 ">Example</h1>
+
+            <div class="bg-blue-100 rounded-2xl p-5 card">
+
+                <div class="flex justify-between rounded-lg  nav bg-blue-500 text-white p-3  ">
+                    <div class="flex space-x-2 items-center">
+                        <a href="" class="text-lg">CancelUI</a>
+                        <div class=" max-lg:hidden ">
+                            <a href="" class="p-4 ">Home</a>
+                            <a href="" class="p-4 ">About</a>
+                            <a href="" class="p-4 ">Contact Us</a>
+                        </div>
+                    </div>
+                    <div>
+                        <button onclick="openmenu()" class="lg:hidden italic">☰</button>
+                    </div>
+                    <div class="space-x-5 flex items-center max-lg:hidden">
+
+                        <a href="" class="bg-blue-700 px-4 py-2 rounded-full">Login</a>
+                    </div>
+                </div>
+                <div id="menubar" class="hidden w-full bg-blue-400 text-white p-4 nav space-y-3 lg:hidden">
+                    <div class="flex flex-col space-y-3">
+                        <a href="#" class="p-1 ">Home</a>
+                        <a href="#" class="p-1">About</a>
+                        <a href="#" class="p-1">Contact Us</a>
+                    </div>
+                    <div class="flex flex-col space-y-3">
+                        <a href="" class="bg-blue-700 px-4 py-2 rounded-full w-20 ">Login</a>
+                    </div>
+                </div>
+                <script>
+                    let menu = false
+                    openmenu = () => {
+                        let menubar = document.getElementById("menubar")
+                        menu = !menu
+                        if (menu) {
+                            menubar.classList.remove('hidden')
+                        } else {
+                            menubar.classList.add('hidden')
+                        }
+                    }
+                </script>
+            </div>
+            <!-------------------------------------------------------- nav code ------------------>
+            <div class="bg-[#f8f9fb] p-5  mt-5 "
+                style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1 ;">
+                <button id="btn5" class="text-orange-500 flex ml-auto " onclick="copy5()">Copy</button>
+                <pre id="cmd5" class=" text-justify overflow-x-auto">
+            <code class=" w-[50px]  ">
+  &lt;div class=&quot;flex justify-between nav bg-blue-500 text-white p-3&quot;&gt;
+    &lt;!-- Left Side --&gt;
+    &lt;div class=&quot;flex space-x-2 items-center&quot;&gt;
+      &lt;a href=&quot;#&quot; class=&quot;text-lg font-bold&quot;&gt;CancelUI&lt;/a&gt;
+      &lt;div class=&quot;max-lg:hidden&quot;&gt;
+        &lt;a href=&quot;#&quot; class=&quot;p-4&quot;&gt;Home&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;p-4&quot;&gt;About&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;p-4&quot;&gt;Contact Us&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Hamburger Icon (Mobile) --&gt;
+    &lt;div&gt;
+      &lt;button onclick=&quot;openmenu()&quot; class=&quot;lg:hidden italic text-2xl&quot;&gt;☰&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Right Side --&gt;
+    &lt;div class=&quot;space-x-5 flex items-center max-lg:hidden&quot;&gt;
+      &lt;a href=&quot;#&quot; class=&quot;bg-blue-700 px-4 py-2 rounded-full&quot;&gt;Login&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Mobile Menu --&gt;
+  &lt;div id=&quot;menubar&quot; class=&quot;hidden w-full bg-blue-400 text-white p-4 nav space-y-3 lg:hidden&quot;&gt;
+    &lt;div class=&quot;flex flex-col space-y-3&quot;&gt;
+      &lt;a href=&quot;#&quot; class=&quot;p-1 &quot;&gt;Home&lt;/a&gt;
+      &lt;a href=&quot;#&quot; class=&quot;p-1 &quot;&gt;About&lt;/a&gt;
+      &lt;a href=&quot;#&quot; class=&quot;p-1 &quot;&gt;Contact Us&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;flex flex-col space-y-3&quot;&gt;
+      &lt;a href=&quot;#&quot; class=&quot;bg-blue-700 px-4 py-2 rounded-full w-20 text-center&quot;&gt;Login&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    let menu = false;
+    function openmenu() {
+      const menubar = document.getElementById(&quot;menubar&quot;);
+      menu = !menu;
+      if (menu) {
+        menubar.classList.remove('hidden');
+      } else {
+        menubar.classList.add('hidden');
+      }
+    }
+  &lt;/script&gt;
+            </code>
+          </pre>
+            </div>
+
+            <h1 class="text-2xl text-gray-700 font-bold mt-8  ">About</h1>
+            <span class=" dark:text-gray-300 text-md mt-2 para inline-block  mb-10 italic  leading-relaxed">
+                The Navbar is your dedicated, focused interface, designed to be the single, context-driven header for
+                transactional pages (like forms or wizards). It provides a flexible wrapper for task-specific
+                content—including the Cancel UI and the primary action button—allowing you to quickly define the user's
+                current mission and maintain a clean, actionable flow with minimal navigational clutter.
+            </span>
+
+        </div>
+
+    </template>
+
+
+    <!-- ------------------------------------------------------form------------------------------------------------------------ -->
+    <template id="form-content">
+        <div class="p-8 ">
+            <h1 class="text-4xl text-gray-700 font-bold">Form</h1>
+            <p class="mt-5 text-xl  text-gray-700">
+                The CancelUI Form empowers developers to streamline input workflows, turning fragmented fields into a
+                unified, adaptive, and user-friendly system
+            </p>
+
+            <h1 class="text-2xl text-gray-700 font-bold mt-8 mb-5 ">Example</h1>
+
+            <div class="bg-blue-100 rounded-2xl p-5 card flex justify-center">
+
+                <!-- Form Preview -->
+                <div class="w-full max-w-md">
+                    <form class="bg-white p-10 rounded-xl shadow-md space-y-6">
+                        <h2 class="text-2xl font-bold mb-4 text-gray-800 text-center">Form</h2>
+                        <div class="space-y-6">
+                            <!-- Name -->
+                            <div class="relative">
+                                <label
+                                    class="absolute -top-3 left-4 bg-white px-1 text-gray-700 font-medium text-sm">Name</label>
+                                <input type="text" id="name" name="name" required placeholder="Enter your name"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-300 border border-[#ddd]" />
+                            </div>
+
+                            <!-- Email -->
+                            <div class="relative">
+                                <label
+                                    class="absolute -top-3 left-4 bg-white px-1 text-gray-700 font-medium text-sm">Email</label>
+                                <input type="email" id="email" name="email" required placeholder="xyz@example.com"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-300 border border-[#ddd]" />
+                            </div>
+
+                            <!-- Password -->
+                            <div class="relative">
+                                <label
+                                    class="absolute -top-3 left-4 bg-white px-1 text-gray-700 font-medium text-sm">Password</label>
+                                <input type="password" id="Password" name="Password" placeholder="Enter your password"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10  text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-300 border border-[#ddd]" />
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit"
+                            class="relative bg-blue-700 w-full overflow-hidden py-3 rounded-full bg-gradient-to-r from-blue-300 to-blue-700 text-white font-semibold tracking-wide shadow-lg group transform transition-all duration-700 hover:scale-105">
+                            <span
+                                class="absolute inset-0 bg-gradient-to-r from-blue-300 via-blue-500 to-blue-700 translate-x-[-100%] group-hover:translate-x-5 transition-transform duration-700 ease-in-out"></span>
+                            <span class="relative z-10">Submit</span>
+                        </button>
+                    </form>
+                </div>
+
+
+
+            </div>
+            <!--------------------------------------------------------  code ------------------>
+            <div class="bg-[#f8f9fb] p-5  mt-5  "
+                style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1 ;">
+                <button id="btn5" class="text-orange-500 flex ml-auto " onclick="copy5()">Copy</button>
+                <pre id="cmd5" class=" text-justify overflow-x-auto">
+            <code class=" w-[50px]  ">
+            &lt;form class=&quot;bg-white p-10 rounded-xl shadow-md space-y-6&quot;&gt;
+  &lt;h2 class=&quot;text-2xl font-bold mb-4 text-gray-800 text-center&quot;&gt;Form&lt;/h2&gt;
+  &lt;div class=&quot;space-y-6&quot;&gt;
+    &lt;div class=&quot;relative&quot;&gt;
+      &lt;label class=&quot;absolute -top-3 left-4 bg-white px-1 text-gray-700 font-medium text-sm&quot;&gt;Name&lt;/label&gt;
+      &lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; placeholder=&quot;Enter your name&quot; class=&quot;w-full px-4 py-3 rounded-xl bg-white/10 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 border border-[#ddd]&quot;/&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;relative&quot;&gt;
+      &lt;label class=&quot;absolute -top-3 left-4 bg-white px-1 text-gray-700 font-medium text-sm&quot;&gt;Email&lt;/label&gt;
+      &lt;input type=&quot;email&quot; id=&quot;email&quot; name=&quot;email&quot; placeholder=&quot;xyz@example.com&quot; class=&quot;w-full px-4 py-3 rounded-xl bg-white/10 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 border border-[#ddd]&quot;/&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;relative&quot;&gt;
+      &lt;label class=&quot;absolute -top-3 left-4 bg-white px-1 text-gray-700 font-medium text-sm&quot;&gt;Password&lt;/label&gt;
+      &lt;input type=&quot;password&quot; id=&quot;Password&quot; name=&quot;Password&quot; placeholder=&quot;Enter your password&quot; class=&quot;w-full px-4 py-3 rounded-xl bg-white/10 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 border border-[#ddd]&quot;/&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class=&quot;relative bg-blue-700 w-full overflow-hidden py-3 rounded-full bg-gradient-to-r from-blue-300 to-blue-700 text-white font-semibold tracking-wide shadow-lg group transform transition-all duration-700 hover:scale-105&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+                </code>
+                </pre>
+            </div>
+
+            <h1 class="text-2xl text-gray-700 font-bold mt-8  ">About</h1>
+            <span class=" dark:text-gray-300 text-md mt-2 para inline-block  mb-10 italic  leading-relaxed">
+                The CancelUI Form is your structured, adaptive interface, designed to serve as the single, context-aware
+                container for user inputs and task flows. It provides a flexible wrapper for form elements—including
+                validation, cancel actions, and submission controls—allowing you to clearly define the user’s intent,
+                reduce friction, and maintain a clean, guided experience with minimal complexity.
+            </span>
+
+        </div>
+    </template>
+
+
+</body>
+
+</html>
