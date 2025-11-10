@@ -209,6 +209,11 @@
             /* heading color */
         }
 
+        #dark-mode.dark h2 {
+            color: #000000;
+            /* heading color */
+        }
+
         #dark-mode.dark li {
             color: white;
             /* heading color */
@@ -244,12 +249,18 @@
             color: #ddd;
         }
 
+        #dark-mode.dark .foot {
+            background-color: #000000;
+            color: #ddd;
+        }
+
+
         #dark-mode.dark .head {
             color: rgb(0, 94, 255);
         }
 
         #dark-mode.dark .comp {
-            color: #b5c3e4;
+            color: #f8faff;
         }
 
         #dark-mode.dark #right-sidebar::-webkit-scrollbar-track {
@@ -298,11 +309,11 @@
             <div class="w-[100%] justify-around flex items-center space-x-8 ">
                 <!-- lap left -->
                 <div class="flex space-x-3 items-center  ">
-                    <img src="images/cui.jpg" alt="" class="size-12 ">
+                    <a href="index.html"><img src="images/cui.jpg" alt="" class="size-12 "></a>
                     <div
                         class="space-x-10 text-md bg-blue-300 px-6 py-3 rounded-full shadow-lg flex flex-nowrap  max-lg:hidden outline-none nav ">
                         <a href="docs.html">Docs</a>
-                        <a href="#">Components</a>
+                        <a>Components</a>
                         <a href="#">Templates</a>
                         <a href="#">Blogs</a>
                     </div>
@@ -365,20 +376,101 @@
             </div>
             </div>
             </div>
-            <button class="lg:hidden text-xl font-bold" onclick="nav1()">☰</button>
+            <button id="menuToggle" class="lg:hidden text-xl font-bold" onclick="nav1()">☰</button>
         </nav>
         <!-- mobile view -->
+        <!-- Toggle Button -->
+
+
+        <!-- Slide-out Navbar -->
         <nav id="showmenu1"
-            class="hidden lg:hidden card dark fixed top-17 -right-5  h-full w-3/4 sm:w-2/4 z-50 overflow-y-auto p-5  ">
-            <div class=" flex-col space-y-5 shadow-lg p-5 bg-gray-50 inline-block ">
-                <h1 class="font-bold uppercase text-[#333]">Getting Started</h1>
-                <ul class="flex flex-col ">
-                    <li class="comp " onclick="loadPage('install')"> Installation</li>
-                    <li class="comp" onclick="loadPage('response')">Responsive Layout Basics</li>
-                </ul>
+            class="fixed top-0 right-0 h-full w-3/4 sm:w-2/4 bg-gray-50 shadow-2xl z-40 transform translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto p-6">
+
+            <div class="flex flex-col space-y-6">
+                <!-- Header -->
+                <div class="flex items-center justify-between">
+                    <h1 class="font-bold uppercase text-[#333]">Menu</h1>
+                    <button id="closeMenu" class="text-gray-600 text-2xl leading-none">&times;</button>
+                </div>
+
+                <!-- Getting Started -->
+                <div>
+                    <h2 class="font-bold uppercase text-[#333] mb-2">Getting Started</h2>
+                    <ul class="flex flex-col space-y-1">
+                        <li class="comp cursor-pointer" onclick="loadPage('install')">Installation</li>
+                        <li class="comp cursor-pointer" onclick="loadPage('response')">Responsive Layout Basics</li>
+                    </ul>
+                </div>
+
+                <!-- Components -->
+                <div>
+                    <h2 class="font-bold uppercase text-[#333] mb-2 mt-4">Components</h2>
+                    <ul class="flex flex-col space-y-1">
+                        <li class="comp cursor-pointer" onclick="loadPage('accord')">Accordion</li>
+                        <li class="comp cursor-pointer">Alert</li>
+                        <li class="comp cursor-pointer" onclick="loadPage('bread')">Breadcrumbs</li>
+                        <li class="comp cursor-pointer" onclick="loadPage('button')">Buttons</li>
+                        <li class="comp cursor-pointer" onclick="loadPage('card')">Card</li>
+                        <li class="comp cursor-pointer">Dropdowns</li>
+                        <li class="comp cursor-pointer">Footer</li>
+                        <li class="comp cursor-pointer" onclick="loadPage('nav')">Navbar</li>
+                        <li class="comp cursor-pointer" onclick="loadPage('page')">Pagination</li>
+                    </ul>
+                </div>
+
+                <!-- Forms -->
+                <div>
+                    <h2 class="font-bold uppercase text-[#333] mb-2 mt-4">Forms</h2>
+                    <ul class="flex flex-col space-y-1">
+                        <li class="comp cursor-pointer" onclick="loadPage('form')">Form</li>
+                    </ul>
+                </div>
             </div>
         </nav>
+
+        <!-- Background Overlay (optional) -->
+        <div id="overlay"
+            class="fixed inset-0 bg-black/30 backdrop-blur-sm hidden z-30 transition-opacity duration-300"></div>
+
+        <script>
+            const menu = document.getElementById("showmenu1");
+            const openBtn = document.getElementById("menuToggle");
+            const closeBtn = document.getElementById("closeMenu");
+            const overlay = document.getElementById("overlay");
+
+            openBtn.addEventListener("click", () => {
+                menu.classList.remove("translate-x-full");
+                overlay.classList.remove("hidden");
+            });
+
+            closeBtn.addEventListener("click", closeMenu);
+            overlay.addEventListener("click", closeMenu);
+
+            function closeMenu() {
+                menu.classList.add("translate-x-full");
+                overlay.classList.add("hidden");
+            }
+        </script>
+
     </section>
+    <script>
+        let search = document.getElementById("searchinput")
+        search.addEventListener("focus", () => {
+            search.placeholder = "Search"
+        })
+
+        search.addEventListener("blur", () => {
+            search.placeholder = "On Click"
+        })
+
+
+        nav = () => {
+            menu = document.getElementById("showmenu")
+            menu.classList.toggle("hidden")
+        }
+
+
+    </script>
 
     <!-- ---------------------------------------------------navbar end----------------------------------------------------------------- -->
 
@@ -399,94 +491,21 @@
 
                 <h1 class="font-bold uppercase text-[#333] mt-6">Components</h1>
                 <ul class="flex flex-col">
-                    <li class="comp"> Accordin</li>
+                    <li class="comp" onclick="loadPage('accord')"> Accordion</li>
                     <li class="comp"> Alert</li>
-                    <li class="comp"> Breadcrumbs</li>
-                    <li class="comp"> Buttons</li>
+                    <li class="comp" onclick="loadPage('bread')"> Breadcrumbs</li>
+                    <li class="comp" onclick="loadPage('button')"> Buttons</li>
                     <li class="comp" onclick="loadPage('card')"> Card</li>
                     <li class="comp"> Dropdowns</li>
                     <li class="comp"> Footer</li>
                     <li class="comp" onclick="loadPage('nav')"> Navbar</li>
-                    <li class="comp"> Nav & Tabs</li>
-                    <li class="comp"> Pop Ups</li>
-                    <li class="comp"> Pagination</li>
-
+                    <li class="comp" onclick="loadPage('page')"> Pagination</li>
                 </ul>
-
                 <h1 class="font-bold uppercase text-[#333] mt-6">Forms</h1>
                 <ul class="flex flex-col">
                     <li class="comp" onclick="loadPage('form')"> Form</li>
 
                 </ul>
-
-
-                <h1 class="font-bold uppercase text-[#333] mt-6">E-Commerce Components</h1>
-
-                <h2 class="font-semibold mt-4">Product Display</h2>
-                <ul class="flex flex-col">
-                    <li class="comp"> Product Card</li>
-                    <li class="comp"> Product Grid</li>
-                    <li class="comp"> Product Detail Page</li>
-                    <li class="comp"> Product Gallery / Quick View</li>
-                </ul>
-
-                <h2 class="font-semibold mt-4">Product Features</h2>
-                <ul class="flex flex-col">
-                    <li class="comp"> Product Filter</li>
-                    <li class="comp"> Product Search</li>
-                    <li class="comp"> Product Comparison</li>
-                    <li class="comp"> Wishlist Button</li>
-                    <li class="comp"> Reviews & Ratings</li>
-                </ul>
-
-                <h2 class="font-semibold mt-4">Cart & Checkout</h2>
-                <ul class="flex flex-col">
-                    <li class="comp"> Shopping Cart</li>
-                    <li class="comp"> Mini Cart / Cart Drawer</li>
-                    <li class="comp"> Cart Item + Quantity Selector</li>
-                    <li class="comp"> Cart Summary</li>
-                    <li class="comp"> Checkout Form</li>
-                    <li class="comp"> Payment Form</li>
-                    <li class="comp"> Shipping Form</li>
-                    <li class="comp"> Order Summary</li>
-                    <li class="comp"> Order Success Page</li>
-                    <li class="comp"> Progress Steps</li>
-                </ul>
-
-                <h1 class="font-bold uppercase text-[#333] mt-6">Admin Panel Components</h1>
-
-                <h2 class="font-semibold mt-4">Admin Tools</h2>
-                <ul class="flex flex-col">
-                    <li class="comp"> User Management</li>
-                    <li class="comp"> Analytics Dashboard</li>
-                    <li class="comp"> Inventory Control</li>
-                    <li class="comp"> Settings Page</li>
-                </ul>
-
-                <h2 class="font-semibold mt-4">Product Management</h2>
-                <ul class="flex flex-col">
-                    <li class="comp"> Product Table (CRUD)</li>
-                    <li class="comp"> Product Form</li>
-                    <li class="comp"> Image Uploader</li>
-                    <li class="comp"> Bulk Actions / Import</li>
-                    <li class="comp"> Category & Variant Manager</li>
-                    <li class="comp"> Price Manager</li>
-                </ul>
-
-                <h2 class="font-semibold mt-4">Order Management</h2>
-                <ul class="flex flex-col">
-                    <li class="comp"> Order Table</li>
-                    <li class="comp"> Order Details & Timeline</li>
-                    <li class="comp"> Order Status</li>
-                    <li class="comp"> Refund Manager</li>
-                </ul>
-
-
-
-
-
-
-
             </div>
         </div>
 
@@ -517,7 +536,7 @@
     <!----------------------------------------------------------------- footer ------------------------------------------------->
     <!-- footer -->
     <section>
-        <footer class=" bottom-0 left-0 w-full bg-[#edf5ff] text-gray-700 py-10 shadow-inner  card">
+        <footer class=" bottom-0 left-0 w-full bg-[#edf5ff] text-gray-700 py-10 shadow-inner  foot">
             <div class="flex flex-col items-center text-center space-y-7">
                 <div class="w-full max-w-md">
 
@@ -652,11 +671,11 @@
                 <div class="mt-10">
                     <h1 class="mb-5 text-3xl text-gray-700 font-semibold">Start Building</h1>
                     <div class="flex flex-wrap gap-6 mt-10  ">
-                        <button class="bg-blue-300 px-10 py-3 text-start w-55 rounded-2xl">Using
+                        <button class="bg-blue-300 px-10 py-3 text-start w-55 rounded-2xl card ">Using
                             CDN</button>
-                        <button class="bg-blue-300 px-10 py-3 text-start w-55 rounded-2xl">Using
+                        <button class="bg-blue-300 px-10 py-3 text-start w-55 rounded-2xl card ">Using
                             NPM</button>
-                        <button class="bg-blue-300 px-10 py-3 text-start w-55 rounded-2xl">Tailwind
+                        <button class="bg-blue-300 px-10 py-3 text-start w-55 rounded-2xl card">Tailwind
                             Config</button>
                     </div>
                 </div>
@@ -783,33 +802,33 @@
 
                 <!-- Card 1 -->
                 <div class="bg-white rounded-xl p-2 h-[110%] shadow-2xl">
-                    <div class="py-12 px-7 rounded-xl bg-orange-100 flex flex-col items-center justify-center ">
+                    <div class="py-12 px-7 rounded-xl bg-orange-100 flex flex-col items-center justify-center card ">
                         <span class="mx-auto text-5xl">⚡</span>
-                        <h2 class="font-semibold text-2xl mt-5 text-center "> Lightning Fast</h2>
+                        <h3 class="font-semibold text-2xl mt-5 text-center "> Lightning Fast</h3>
                         <p class="text-2sm text-gray-700 text-center mt-5">Optimized for Performance with
                             minimal bundle size and tree-shaking support</p>
                     </div>
                 </div>
                 <div class="bg-white rounded-xl p-2 h-[110%] shadow-2xl">
-                    <div class="py-12 px-7 rounded-xl bg-green-100 flex flex-col items-center justify-center ">
+                    <div class="py-12 px-7 rounded-xl bg-green-100 flex flex-col items-center justify-center card ">
                         <span class="mx-auto text-5xl">⚡</span>
-                        <h2 class="font-semibold text-2xl mt-5 text-center "> Highly Customizable</h2>
+                        <h3 class="font-semibold text-2xl mt-5 text-center "> Highly Customizable</h3>
                         <p class="text-2sm text-gray-700 text-center mt-5">Extensive theming system with CSS
                             variables and design tokens.</p>
                     </div>
                 </div>
                 <div class="bg-white rounded-xl p-2 h-[110%] shadow-2xl">
-                    <div class="py-12 px-7 rounded-xl bg-purple-100 flex flex-col items-center justify-center ">
+                    <div class="py-12 px-7 rounded-xl bg-purple-100 flex flex-col items-center justify-center card ">
                         <span class="mx-auto text-5xl">⚡</span>
-                        <h2 class="font-semibold text-2xl mt-5 text-center "> Lightning Fast</h2>
+                        <h3 class="font-semibold text-2xl mt-5 text-center "> Lightning Fast</h3>
                         <p class="text-2sm text-gray-700 text-center mt-5">Responsive components that work
                             perfectly on all devices and screen</p>
                     </div>
                 </div>
                 <div class="bg-white rounded-xl p-2 h-[110%] shadow-2xl">
-                    <div class="py-12 px-7 rounded-xl bg-pink-100 flex flex-col items-center justify-center ">
+                    <div class="py-12 px-7 rounded-xl bg-pink-100 flex flex-col items-center justify-center card ">
                         <span class="mx-auto text-5xl">⚡</span>
-                        <h2 class="font-semibold text-2xl mt-5 text-center "> Dark Mode</h2>
+                        <h3 class="font-semibold text-2xl mt-5 text-center "> Dark Mode</h3>
                         <p class="text-2sm text-gray-700 text-center mt-5">Buit-in dark mode support with
                             automatic</p>
                     </div>
@@ -826,11 +845,11 @@
                 Community
             </h1>
 
-            <h2 class="mt-7 text-base md:text-xl font-semibold">
+            <p class="mt-7 text-base md:text-xl font-semibold">
                 Use these resources to stay in touch with CancelUI and
                 <br class="hidden sm:block">
                 receive assistance
-            </h2>
+            </p>
 
             <ul class="list-disc list-inside space-y-3 mt-5 text-sm md:text-lg">
                 <li>For announcements and updates, check out the CancelUI Blog (link)</li>
@@ -855,7 +874,7 @@
 
                     <section class="mb-16">
                         <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 section-title">Grid System</h1>
-                        <div class="glass-card rounded-2xl p-6 sm:p-8">
+                        <div class="glass-card rounded-2xl p-6 sm:p-8 card ">
                             <h3 class="text-xl font-semibold mb-4 text-blue-700 flex items-center">
                                 <i class="fas fa-th-large mr-3"></i>
                                 Example
@@ -896,7 +915,7 @@
 
                     <section class="mb-16">
                         <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 section-title">How it Works</h1>
-                        <div class="glass-card rounded-2xl p-6 sm:p-8">
+                        <div class="glass-card rounded-2xl p-6 sm:p-8 card ">
                             <div class="flex items-center mb-6">
                                 <i class="fas fa-cogs text-2xl text-blue-700 mr-4"></i>
                                 <h3 class="text-xl font-semibold text-blue-700">Grid Architecture</h3>
@@ -932,7 +951,7 @@
 
                     <section class="mb-16">
                         <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 section-title">Grid Options</h1>
-                        <div class="glass-card rounded-2xl p-6 sm:p-8">
+                        <div class="glass-card rounded-2xl p-6 sm:p-8  ">
                             <div class="overflow-x-auto">
                                 <table class="w-full text-sm">
                                     <thead>
@@ -986,7 +1005,7 @@
                     <section class="mb-16">
                         <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 section-title">Auto-layout Columns
                         </h1>
-                        <div class="glass-card rounded-2xl p-6 sm:p-8">
+                        <div class="glass-card rounded-2xl p-6 sm:p-8 card ">
                             <h3 class="text-xl font-semibold mb-6 text-blue-700 flex items-center">
                                 <i class="fas fa-equals mr-3"></i>
                                 Equal-width
@@ -1042,7 +1061,7 @@
                     <section class="mb-16">
                         <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 section-title">Setting Column Width
                         </h1>
-                        <div class="glass-card rounded-2xl p-6 sm:p-8">
+                        <div class="glass-card rounded-2xl p-6 sm:p-8 card">
                             <div class="demo-grid rounded-xl p-6 mb-6">
                                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
                                     <div
@@ -1075,7 +1094,7 @@
                     <section class="mb-16">
                         <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 section-title">Responsive Examples
                         </h1>
-                        <div class="glass-card rounded-2xl p-6 sm:p-8">
+                        <div class="glass-card rounded-2xl p-6 sm:p-8 card ">
                             <h3 class="text-xl font-semibold mb-6 text-blue-700 flex items-center">
                                 <i class="fas fa-mobile-alt mr-3"></i>
                                 Mobile to Desktop
@@ -1117,10 +1136,10 @@
 
                         <br>
                         <br>
-                        <div class="mb-16">
+                        <div class="mb-16 card ">
                             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 section-title">Advanced Grid
                                 Features</h1>
-                            <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-12">
+                            <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-12 card">
 
                                 <div>
                                     <h3 class="text-xl font-semibold mb-4 text-blue-700 flex items-center">
@@ -1154,7 +1173,7 @@
                                         <i class="fas fa-th-large mr-3"></i>
                                         Nested Grids
                                     </h3>
-                                    <div class="demo-grid rounded-xl p-6">
+                                    <div class="demo-grid rounded-xl p-6  card">
                                         <div class="grid grid-cols-2 gap-4 text-white ">
                                             <div
                                                 class="demo-item demo-item-1 p-4 flex items-center justify-center min-h-[80px]">
@@ -1191,7 +1210,7 @@
                                         <i class="fas fa-arrows-alt-v mr-3"></i>
                                         Row Span
                                     </h3>
-                                    <div class="demo-grid rounded-xl p-6">
+                                    <div class="demo-grid rounded-xl p-6 card">
                                         <div class="grid grid-cols-4 gap-4 text-white">
                                             <div
                                                 class="demo-item demo-item-1 p-4 text-center row-span-2 flex items-center justify-center min-h-[80px]">
@@ -1224,7 +1243,7 @@
                                         <i class="fas fa-arrows-alt mr-3"></i>
                                         Gap Variations
                                     </h3>
-                                    <div class="demo-grid rounded-xl p-6">
+                                    <div class="demo-grid rounded-xl p-6 card">
                                         <div class="grid grid-cols-3 gap-1 text-white mb-4">
                                             <div class="demo-item p-4 text-center">Gap 1</div>
                                             <div class="demo-item p-4 text-center">Gap 1</div>
@@ -1237,7 +1256,7 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <div class="code-block rounded-xl p-6 relative bg-gray-800">
+                                    <div class="code-block rounded-xl p-6 relative bg-gray-800  card">
                                         <button class="copy-btn"><i class="fas fa-copy mr-2"></i>Copy</button>
                                         <pre class="text-sm text-green-400 overflow-x-auto"><code>&lt;div class="grid grid-cols-3 gap-1"&gt;...&lt;/div&gt;
 &lt;div class="grid grid-cols-3 gap-4"&gt;...&lt;/div&gt;</code></pre>
@@ -1249,7 +1268,7 @@
                                         <i class="fas fa-arrows-alt mr-3"></i>
                                         Alignment & Justify
                                     </h3>
-                                    <div class="demo-grid rounded-xl p-6">
+                                    <div class="demo-grid rounded-xl p-6 card ">
                                         <div
                                             class="grid grid-cols-3 h-32 gap-4 text-white justify-items-center items-center text-center">
                                             <div class="demo-item p-4">Centered</div>
@@ -1270,7 +1289,7 @@
                                         <i class="fas fa-border-all mr-3"></i>
                                         Explicit Rows
                                     </h3>
-                                    <div class="demo-grid rounded-xl p-6">
+                                    <div class="demo-grid rounded-xl p-6  card">
                                         <div class="grid grid-rows-3 gap-4 text-white h-64">
                                             <div class="demo-item p-4 text-center">Row 1</div>
                                             <div class="demo-item p-4 text-center">Row 2</div>
@@ -1290,7 +1309,7 @@
                                         <i class="fas fa-expand-arrows-alt mr-3"></i>
                                         Container vs Full-width
                                     </h3>
-                                    <div class="demo-grid rounded-xl p-6">
+                                    <div class="demo-grid rounded-xl p-6  card">
                                         <div class="container mx-auto grid grid-cols-3 gap-4 text-white mb-4">
                                             <div class="demo-item p-4 text-center">Container 1</div>
                                             <div class="demo-item p-4 text-center">Container 2</div>
@@ -1330,7 +1349,7 @@
     <!-- ---------------------------------------------------------------card---------------------------------------- -->
     <template id="card-content">
         <div class="p-8 ">
-            <h1 class="text-4xl text-gray-700 font-bold">Card</h1>
+            <h1 id="card" class="text-4xl text-gray-700 font-bold">Card</h1>
             <p class="mt-5 text-xl  text-gray-700">
                 The CancelUI Card allows developers to manage visual complexity at scale, turning crowded pages into
                 coherent, segmented systems.
@@ -1339,32 +1358,32 @@
             <h1 class="text-2xl text-gray-700 font-bold mt-8 mb-5 ">Example</h1>
 
             <div class="bg-blue-100 rounded-2xl p-5 card flex gap-10 justify-center  ">
-                <div class="max-w-86 bg-white rounded-2xl shadow-blue-300 shadow-xl">
+                <div class="max-w-86 bg-white rounded-2xl ">
                     <img src="https://placehold.co/600x400" alt="" class="rounded-2xl mx-auto object-cover transform transition-transform duration-300 hover:scale-110
     hover:shadow-blue-200 hover:shadow-xl" />
                     <div class="p-5 space-y-3">
                         <h2 class="font-bold text-xl">
                             Card title
                         </h2>
-                        <p class="text-[#333]">
+                        <h5 class="text-[#333]">
                             Some quick example text to build on the card title.
-                        </p>
+                        </h5>
                         <button class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-lg">
                             Go Somewhere
                         </button>
                     </div>
                 </div>
 
-                <div class="max-w-86 bg-white rounded-2xl shadow-blue-300 shadow-xl">
+                <div class="max-w-86 bg-white rounded-2xl max-lg:hidden ">
                     <img src="https://placehold.co/600x400" alt="" class="rounded-2xl mx-auto object-cover transform transition-transform duration-300 hover:scale-110
     hover:shadow-blue-200 hover:shadow-xl" />
                     <div class="p-5 space-y-3">
                         <h2 class="font-bold text-xl">
                             Card title
                         </h2>
-                        <p class="text-[#333]">
+                        <h5 class="text-[#333]">
                             Some quick example text to build on the card title.
-                        </p>
+                        </h5>
                         <button class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-lg">
                             Go Somewhere
                         </button>
@@ -1372,7 +1391,7 @@
                 </div>
             </div>
             <!-------------------------------------------------------- card code ------------------>
-            <div class="bg-[#f8f9fb] p-5  mt-5 "
+            <div class="bg-[#f8f9fb] p-5  mt-5 card "
                 style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1 ;">
                 <button id="btn5" class="text-orange-500 flex ml-auto " onclick="copy5()">Copy</button>
                 <pre id="cmd5" class=" text-justify overflow-x-auto">
@@ -1453,10 +1472,10 @@
                     </div>
                 </div>
                 <script>
-                    let menu = false
+                    let menu1 = false
                     openmenu = () => {
                         let menubar = document.getElementById("menubar")
-                        menu = !menu
+                        menu1 = !menu1
                         if (menu) {
                             menubar.classList.remove('hidden')
                         } else {
@@ -1466,7 +1485,7 @@
                 </script>
             </div>
             <!-------------------------------------------------------- nav code ------------------>
-            <div class="bg-[#f8f9fb] p-5  mt-5 "
+            <div class="bg-[#f8f9fb] p-5  mt-5 card "
                 style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1 ;">
                 <button id="btn5" class="text-orange-500 flex ml-auto " onclick="copy5()">Copy</button>
                 <pre id="cmd5" class=" text-justify overflow-x-auto">
@@ -1591,7 +1610,7 @@
 
             </div>
             <!--------------------------------------------------------  code ------------------>
-            <div class="bg-[#f8f9fb] p-5  mt-5  "
+            <div class="bg-[#f8f9fb] p-5  mt-5 card "
                 style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1 ;">
                 <button id="btn5" class="text-orange-500 flex ml-auto " onclick="copy5()">Copy</button>
                 <pre id="cmd5" class=" text-justify overflow-x-auto">
@@ -1629,7 +1648,597 @@
         </div>
     </template>
 
+    <!-- ------------------------------------------------button------------------------------------------------------------- -->
+    <template id="button-content">
+        <div class="p-8 ">
+            <h1 class="text-4xl text-gray-700 font-bold">Button</h1>
+            <p class="mt-5 text-xl  text-gray-700 ">
+                The CancelUI Button empowers developers to streamline input workflows, turning fragmented fields into a
+                unified, adaptive, and user-friendly system.
+            </p>
 
+            <h1 class="text-2xl text-gray-700 font-bold mt-8 mb-5 ">Example</h1>
+
+            <div class="bg-blue-100 rounded-2xl p-5 card flex justify-center">
+
+                <!-- Form Preview -->
+                <div class="w-full flex justify-center card">
+
+                    <div class="mt-12 flex flex-col items-center justify-center space-y-6">
+                        <button
+                            class="px-6 py-3 rounded-2xl bg-white/50 border w-full border-white/50 shadow-md text-gray-800 font-medium hover:bg-white/40 transition">
+                            Button
+                        </button>
+
+                        <button
+                            class="px-6 py-3 w-full rounded-2xl text-white font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-lg hover:scale-105 transition">
+                            Gradient Button
+                        </button>
+
+                        <button
+                            class="px-6 py-3 w-full rounded-xl bg-black text-white font-semibold relative group overflow-hidden">
+                            <span
+                                class="absolute inset-0 bg-green-500 blur-md opacity-50 group-hover:opacity-75 transition"></span>
+                            <span class="relative">Neon Glow Button</span>
+                        </button>
+
+                        <button
+                            class="flex items-center space-x-2 px-6 py-3 w-full rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold shadow-md hover:scale-105 group">
+                            <span class="opacity-70 group-hover:opacity-100 ">Icon Button</span>
+                            <i
+                                class="mt-1 opacity-60 group-hover:opacity-100 group-hover:w-5 fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <!--------------------------------------------------------  code ------------------>
+            <div class="bg-[#f8f9fb] p-5  mt-5  card "
+                style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1 ;">
+                <button id="btn5" class="text-orange-500 flex ml-auto " onclick="copy5()">Copy</button>
+                <pre id="cmd5" class=" text-justify overflow-x-auto">
+            <code class=" w-[50px]  ">
+&lt;button
+  class="px-6 py-3 rounded-2xl bg-white/50 border border-white/50 shadow-md text-gray-800 font-medium hover:bg-white/40 transition"&gt;
+  Button
+&lt;/button&gt;
+
+&lt;button
+  class="px-6 py-3 rounded-2xl text-white font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-lg hover:scale-105 transition"&gt;
+  Gradient Button
+&lt;/button&gt;
+
+&lt;button
+  class="px-6 py-3 rounded-xl bg-black text-white font-semibold relative group overflow-hidden"&gt;
+  &lt;span
+    class="absolute inset-0 bg-green-500 blur-md opacity-50 group-hover:opacity-75 transition"&gt;
+  &lt;/span&gt;
+  &lt;span class="relative"&gt;Neon Glow Button&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;button
+  class="flex items-center space-x-2 px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold shadow-md hover:scale-105 group"&gt;
+  &lt;span class="opacity-70 group-hover:opacity-100"&gt;Icon Button&lt;/span&gt;
+  &lt;i class="mt-1 opacity-60 group-hover:opacity-100 fa-solid fa-arrow-right"&gt;&lt;/i&gt;
+&lt;/button&gt;
+                </code>
+                </pre>
+            </div>
+
+            <h1 class="text-2xl text-gray-700 font-bold mt-8  ">About</h1>
+            <span class=" dark:text-gray-300 text-md mt-2 para inline-block  mb-10 italic  leading-relaxed">
+                The CancelUI Button is your structured, adaptive interface, designed to serve as the single,
+                context-aware container for user inputs and task flows. It provides a flexible wrapper for button
+                elements—including validation, cancel actions, and submission controls—allowing you to clearly define
+                the user’s intent, reduce friction, and maintain a clean, guided experience with minimal complexity.
+            </span>
+
+        </div>
+    </template>
+
+    <!-- -------------------------------------------------------breadcrumb------------------------------------------------------------ -->
+    <template id="bread-content">
+        <div class="p-8 ">
+            <h1 class="text-4xl text-gray-700 font-bold">Breadcrumbs</h1>
+            <p class="mt-5 text-xl  text-gray-700">
+                The CancelUI Breadcrumb empowers developers to streamline input workflows, turning fragmented fields
+                into a unified, adaptive, and user-friendly system.
+            </p>
+
+            <h1 class="text-2xl text-gray-700 font-bold mt-8 mb-5 ">Example</h1>
+
+            <div class="bg-blue-100 rounded-2xl p-5 card flex justify-center">
+
+                <!-- Form Preview -->
+                <div class="w-full flex justify-center card">
+                    <nav class="w-full mt-4 flex justify-center">
+                        <ol class="flex flex-wrap items-center text-gray-600  ">
+                            <li>
+                                <a href="#" class="hover:text-gray-900">Home</a>
+                            </li>
+                            <li class="mx-2 text-gray-400">/</li>
+                            <li>
+                                <a href="#" class="hover:text-gray-900">Products</a>
+                            </li>
+                            <li class="mx-2 text-gray-400">/</li>
+                            <li class="text-gray-900 font-medium">Product </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <!--------------------------------------------------------  code ------------------>
+            <div class="bg-[#f8f9fb] p-5  mt-5 card "
+                style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1 ;">
+                <button id="btn5" class="text-orange-500 flex ml-auto " onclick="copy5()">Copy</button>
+                <pre id="cmd5" class=" text-justify overflow-x-auto">
+            <code class=" w-[50px]  ">
+&lt;nav
+  class="px-6 py-3 rounded-2xl bg-white/50 border border-white/50 shadow-md text-gray-800 font-medium hover:bg-white/40 transition backdrop-blur-sm w-fit mx-auto"
+&gt;
+  &lt;ol class="flex flex-wrap items-center text-sm"&gt;
+    &lt;li&gt;
+      &lt;a href="#" class="hover:text-gray-900"&gt;Home&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="mx-2 text-gray-500"&gt;/&lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="#" class="hover:text-gray-900"&gt;Products&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="mx-2 text-gray-500"&gt;/&lt;/li&gt;
+    &lt;li class="text-gray-900 font-semibold"&gt;Product&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;                </code>
+                </pre>
+            </div>
+
+            <h1 class="text-2xl text-gray-700 font-bold mt-8  ">About</h1>
+            <span class=" dark:text-gray-300 text-md mt-2 para inline-block  mb-10 italic  leading-relaxed">
+                The CancelUI Breadcrumb is your structured, adaptive interface, designed to serve as the single,
+                context-aware container for user inputs and task flows. It provides a flexible wrapper for breadcrumb
+                elements—including validation, cancel actions, and navigation controls—allowing you to clearly define
+                the user’s intent, reduce friction, and maintain a clean, guided experience with minimal complexity.
+            </span>
+
+        </div>
+
+    </template>
+
+    <!-- ----------------------------------------------------pagenation--------------------------------------------------- -->
+    <template id="page-content">
+        <div class="p-8 ">
+            <h1 class="text-4xl text-gray-700 font-bold">Pagination</h1>
+            <p class="mt-5 text-xl  text-gray-700">
+                The CancelUI Pagination empowers developers to organize and navigate content seamlessly, turning
+                disconnected pages into a unified, adaptive, and user-friendly system.
+            </p>
+
+            <h1 class="text-2xl text-gray-700 font-bold mt-8 mb-5 ">Example</h1>
+
+            <div class="bg-blue-100 rounded-2xl p-5 card flex justify-center">
+
+                <!-- Form Preview -->
+                <div class="w-full flex justify-center card">
+                    <nav class="flex items-center justify-center space-x-2 ">
+                        <button
+                            class="px-3 py-1 rounded-lg bg-white/50 border border-white/50 shadow-md text-gray-800 font-medium hover:bg-white/40 transition">
+                            Prev
+                        </button>
+
+                        <button
+                            class="px-3 py-1 rounded-lg bg-blue-600 text-white font-medium shadow-md hover:bg-blue-700 transition">
+                            1
+                        </button>
+
+                        <button
+                            class="px-3 py-1 rounded-lg bg-white/50 border border-white/50 shadow-md text-gray-800 font-medium hover:bg-white/40 transition">
+                            2
+                        </button>
+
+                        <button
+                            class="px-3 py-1 rounded-lg bg-white/50 border border-white/50 shadow-md text-gray-800 font-medium hover:bg-white/40 transition">
+                            3
+                        </button>
+
+                        <button
+                            class="px-3 py-1 rounded-lg bg-white/50 border border-white/50 shadow-md text-gray-800 font-medium hover:bg-white/40 transition">
+                            Next
+                        </button>
+                    </nav>
+
+                </div>
+            </div>
+            <!--------------------------------------------------------  code ------------------>
+            <div class="bg-[#f8f9fb] p-5  mt-5 card "
+                style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1 ;">
+                <button id="btn5" class="text-orange-500 flex ml-auto " onclick="copy5()">Copy</button>
+                <pre id="cmd5" class=" text-justify overflow-x-auto">
+            <code class=" w-[50px]  ">
+&lt;nav class="flex items-center justify-center space-x-2 mt-10" &gt;
+  &lt;button
+    class="px-3 py-1 rounded-lg bg-white/50 border border-white/50 shadow-md
+           text-gray-800 font-medium hover:bg-white/40 transition"&gt;
+    Prev
+  &lt;/button&gt;
+
+  &lt;button
+    class="px-3 py-1 rounded-lg bg-blue-600 text-white font-medium shadow-md
+           hover:bg-blue-700 transition"&gt;
+    1
+  &lt;/button&gt;
+
+  &lt;button
+    class="px-3 py-1 rounded-lg bg-white/50 border border-white/50 shadow-md
+           text-gray-800 font-medium hover:bg-white/40 transition"&gt;
+    2
+  &lt;/button&gt;
+
+  &lt;button
+    class="px-3 py-1 rounded-lg bg-white/50 border border-white/50 shadow-md
+           text-gray-800 font-medium hover:bg-white/40 transition"&gt;
+    3
+  &lt;/button&gt;
+
+  &lt;button
+    class="px-3 py-1 rounded-lg bg-white/50 border border-white/50 shadow-md
+           text-gray-800 font-medium hover:bg-white/40 transition"&gt;
+    Next
+  &lt;/button&gt;
+&lt;/nav&gt;                </code>
+                </pre>
+            </div>
+
+            <h1 class="text-2xl text-gray-700 font-bold mt-8  ">About</h1>
+            <span class=" dark:text-gray-300 text-md mt-2 para inline-block  mb-10 italic  leading-relaxed">
+                The CancelUI Pagination is your structured, adaptive interface, designed to serve as the single,
+                context-aware container for user inputs and task flows. It provides a flexible wrapper for pagination
+                elements—including validation, cancel actions, and navigation controls—allowing you to clearly define
+                the user’s intent, reduce friction, and maintain a clean, guided experience with minimal complexity.
+            </span>
+
+        </div>
+
+    </template>
+
+    <!-- ---------------------------------------------------------accord-------------------------------------------------- -->
+    <div id="acc">
+        <template id="accord-content">
+
+            <div class="p-8 ">
+                <h1 class="text-4xl text-gray-700 font-bold">Accordion</h1>
+                <p class="mt-5 text-xl  text-gray-700">
+                    The CancelUI Accordion empowers developers to organize complex information into a unified, adaptive,
+                    and user-friendly collapsible system.
+
+                </p>
+
+                <h1 class="text-2xl text-gray-700 font-bold mt-8 mb-5 ">Example</h1>
+
+                <div class="bg-blue-100 rounded-2xl p-5 card flex justify-center">
+
+                    <!-- Form Preview -->
+                    <div class="w-full ">
+
+                        <div class="">
+                            <button
+                                class="w-full flex justify-between items-center p-4 text-left rounded-t-xl transition duration-200 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300 bg-blue-600"
+                                aria-expanded="false" data-accordion-trigger>
+                                <span class="font-semibold text-lg text-white">What is Cancel UI?</span>
+                                <svg class="h-6 w-6 text-white  transition-transform duration-300" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="h-0 overflow-hidden px-5 transition-all duration-300 ease-in-out"
+                                data-accordion-panel>
+                                <div class="py-4 text-slate-700 border-t border-blue-100">A small set of UI components
+                                    built with HTML, Tailwind, and JS.</div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <button
+                                class="w-full flex justify-between items-center p-4 text-left transition duration-200 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300 bg-blue-600"
+                                aria-expanded="false" data-accordion-trigger>
+                                <span class="font-semibold text-lg text-white">Integration pattern</span>
+                                <svg class="h-6 w-6 text-white transition-transform duration-300" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="h-0 overflow-hidden px-5 transition-all duration-300 ease-in-out"
+                                data-accordion-panel>
+                                <div class="py-4 text-slate-700 border-t border-blue-100">Just copy the markup and add
+                                    the JS snippet at the end.</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 ">
+                            <div class="cancel-accordion-demo rounded-xl border border-blue-300 divide-y divide-blue-100 shadow-sm"
+                                data-allow-multiple="false">
+
+                                <div>
+                                    <button
+                                        class="w-full flex justify-between items-center p-4 text-left rounded-t-xl transition duration-200 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300 bg-blue-600 "
+                                        aria-expanded="true" data-accordion-trigger>
+                                        <span class="font-semibold text-lg text-white">What is Cancel UI?</span>
+                                        <svg class="h-6 w-6 text-white rotate-180 transition-transform duration-300"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                    <div class="px-5 overflow-hidden transition-all duration-300 ease-in-out"
+                                        style="height:auto;" data-accordion-panel>
+                                        <div class="py-4 text-slate-700 border-t border-blue-100">
+                                            A small set of UI components built with HTML, Tailwind, and JS.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <button
+                                        class="w-full flex justify-between items-center p-4 text-left transition duration-200 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300 bg-blue-600"
+                                        aria-expanded="false" data-accordion-trigger>
+                                        <span class="font-semibold text-lg text-white">Integration pattern</span>
+                                        <svg class="h-6 w-6 text-white transition-transform duration-300"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                    <div class="h-0 overflow-hidden px-5 transition-all duration-300 ease-in-out"
+                                        data-accordion-panel>
+                                        <div class="py-4 text-slate-700 border-t border-blue-100">
+                                            Just copy the markup and add the JS snippet at the end.
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+    </div>
+
+
+    <!--------------------------------------------------------  code ------------------>
+    <div data-copy-container class="bg-[#f8f9fb] p-5 mt-5 m-6 border border-transparent"
+        style="border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0)) 1;">
+        <button data-copy-btn class="text-orange-500 flex ml-auto mb-2 px-3 py-1 transition">
+            Copy
+        </button>
+
+        <pre class="text-justify overflow-x-auto text-sm font-mono leading-relaxed">
+<code data-code-block>
+&lt;div class="card"&gt;
+  &lt;button 
+    class="w-full flex justify-between items-center p-4 text-left transition duration-200 hover:bg-blue-500 
+           focus:outline-none focus:ring-2 focus:ring-blue-300 bg-blue-600"
+    aria-expanded="false" 
+    data-accordion-trigger&gt;
+    &lt;span class="font-semibold text-lg text-white"&gt;Integration pattern&lt;/span&gt;
+    &lt;svg 
+      class="h-6 w-6 text-white transition-transform duration-300" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      stroke-width="2"&gt;
+      &lt;path d="M19 9l-7 7-7-7" /&gt;
+    &lt;/svg&gt;
+  &lt;/button&gt;
+
+  &lt;div 
+    class="h-0 overflow-hidden px-5 transition-all duration-300 ease-in-out" 
+    data-accordion-panel&gt;
+    &lt;div class="py-4 text-slate-700 border-t border-blue-100"&gt;
+      Just copy the markup and add the JS snippet at the end.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code>
+
+
+
+  </pre>
+    </div>
+
+
+    <h1 class="text-2xl text-gray-700 font-bold mt-5 px-4 ">About</h1>
+    <span class="  text-md  para inline-block  mb-10 italic  leading-relaxed p-5">
+        The CancelUI Accordion is your structured, adaptive layout component, designed to serve as the single,
+        context-aware container for organizing and displaying segmented content. It provides a flexible wrapper
+        for collapsible sections—including headers, panels, and nested elements—allowing you to present
+        information progressively, reduce visual clutter, and maintain a clean, guided interface that adapts
+        seamlessly to user interaction.
+
+    </span>
+
+    </div>
+
+    </div>
+    <script>
+        document.addEventListener("click", async (e) => {
+            const btn = e.target.closest("[data-copy-btn]");
+            if (!btn) return;
+
+            const container = btn.closest("div") || document;
+            const codeBlocks = container.querySelectorAll("[data-code-block]");
+            let codeText = "";
+            codeBlocks.forEach(block => codeText += block.innerText.trim() + "\n\n");
+
+            try {
+                await navigator.clipboard.writeText(codeText.trim());
+                const original = btn.textContent;
+                btn.textContent = "Copied";
+                setTimeout(() => {
+                    btn.textContent = original;
+                }, 1000);
+            } catch {
+                btn.textContent = "Failed";
+                setTimeout(() => btn.textContent = "Copy", 800);
+            }
+        });
+
+
+        (function () {
+            const findPanelFor = (trigger) => {
+                let p = trigger.nextElementSibling;
+                if (p && p.hasAttribute && p.hasAttribute('data-accordion-panel')) return p;
+
+                let sib = trigger.nextElementSibling;
+                while (sib) {
+                    if (sib.nodeType === 1 && sib.hasAttribute && sib.hasAttribute('data-accordion-panel')) return sib;
+                    sib = sib.nextElementSibling;
+                }
+
+                const container = trigger.closest('.cancel-accordion-demo') || trigger.parentElement;
+                if (container) {
+                    return container.querySelector('[data-accordion-panel]');
+                }
+                return null;
+            };
+
+            const preparePanel = (panel) => {
+                if (!panel) return;
+                panel.style.overflow = 'hidden';
+                if (panel.classList && panel.classList.contains('h-0')) panel.classList.remove('h-0');
+                const cs = window.getComputedStyle(panel).transition;
+                if (!cs || cs === 'none' || cs === 'all 0s ease 0s') {
+                    panel.style.transition = 'height 300ms ease';
+                }
+            };
+
+            const setClosed = (btn, panel, icon) => {
+                if (!panel) return;
+                if (panel.style.height === 'auto' || window.getComputedStyle(panel).height === 'auto') {
+                    panel.style.height = panel.scrollHeight + 'px';
+                    panel.offsetHeight;
+                }
+                btn.setAttribute('aria-expanded', 'false');
+                icon?.classList.remove('rotate-180');
+                requestAnimationFrame(() => panel.style.height = '0');
+            };
+
+            const setOpen = (btn, panel, icon) => {
+                if (!panel) return;
+                if (panel.style.height === 'auto') panel.style.height = panel.scrollHeight + 'px';
+                panel.offsetHeight;
+
+                btn.setAttribute('aria-expanded', 'true');
+                icon?.classList.add('rotate-180');
+                requestAnimationFrame(() => {
+                    panel.style.height = panel.scrollHeight + 'px';
+                });
+
+                const tidy = (e) => {
+                    if (e.propertyName !== 'height') return;
+                    panel.style.height = 'auto';
+                    panel.removeEventListener('transitionend', tidy);
+                };
+                panel.addEventListener('transitionend', tidy);
+            };
+
+            const toggle = (trigger) => {
+                const panel = findPanelFor(trigger);
+                if (!panel) return;
+                const icon = trigger.querySelector('svg');
+                const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+                const parent = trigger.closest('.cancel-accordion-demo');
+                const allowMultiple = parent && parent.dataset.allowMultiple === 'true';
+
+                if (!allowMultiple && parent && !isOpen) {
+                    const siblings = Array.from(parent.querySelectorAll('[data-accordion-trigger]'));
+                    siblings.forEach(s => {
+                        if (s === trigger) return;
+                        const sp = findPanelFor(s);
+                        if (!sp) return;
+                        if (s.getAttribute('aria-expanded') === 'true') {
+                            setClosed(s, sp, s.querySelector('svg'));
+                        }
+                    });
+                }
+
+                if (isOpen) setClosed(trigger, panel, icon);
+                else setOpen(trigger, panel, icon);
+            };
+
+            const initTrigger = (trigger) => {
+                if (trigger.dataset._cuiBound === 'true') return;
+                trigger.dataset._cuiBound = 'true';
+                const panel = findPanelFor(trigger);
+                const icon = trigger.querySelector('svg');
+                if (!panel) return;
+                preparePanel(panel);
+
+                if (trigger.getAttribute('aria-expanded') === 'true') {
+                    panel.style.height = panel.scrollHeight + 'px';
+                    icon?.classList.add('rotate-180');
+                    const onEnd = (e) => {
+                        if (e.propertyName === 'height') {
+                            panel.style.height = 'auto';
+                            panel.removeEventListener('transitionend', onEnd);
+                        }
+                    };
+                    panel.addEventListener('transitionend', onEnd);
+                    setTimeout(() => { if (panel.style.height !== 'auto') panel.style.height = 'auto'; }, 500);
+                } else {
+                    panel.style.height = '0';
+                    icon?.classList.remove('rotate-180');
+                }
+
+                trigger.addEventListener('keydown', (ev) => {
+                    if (ev.key === ' ' || ev.key === 'Enter') {
+                        ev.preventDefault();
+                        toggle(trigger);
+                    }
+                });
+
+                const ro = new ResizeObserver(() => {
+                    if (trigger.getAttribute('aria-expanded') === 'true' && panel.style.height !== 'auto') {
+                        panel.style.height = panel.scrollHeight + 'px';
+                    }
+                });
+                ro.observe(panel);
+            };
+
+            const initNode = (root = document) => {
+                const triggers = Array.from(root.querySelectorAll('[data-accordion-trigger]'));
+                triggers.forEach(initTrigger);
+            };
+
+            document.addEventListener('click', (e) => {
+                const trigger = e.target.closest && e.target.closest('[data-accordion-trigger]');
+                if (!trigger) return;
+                e.preventDefault();
+                toggle(trigger);
+            });
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => initNode(document));
+            } else {
+                initNode(document);
+            }
+
+            const mo = new MutationObserver((mutations) => {
+                for (const m of mutations) {
+                    m.addedNodes.forEach(node => {
+                        if (node.nodeType !== 1) return;
+                        initNode(node);
+                    });
+                }
+            });
+            mo.observe(document.body, { childList: true, subtree: true });
+
+            window.initCancelAccordions = initNode;
+        })();
+    </script>
+    </template>
+    </div>
 </body>
 
 </html>

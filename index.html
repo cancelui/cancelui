@@ -32,6 +32,13 @@
       color: #ddd;
     }
 
+    #dark-mode.dark .foot {
+      background-color: #000000;
+      color: #ddd;
+    }
+
+
+
     #dark-mode.dark .nav {
       background-color: rgb(0, 94, 255);
       color: #ddd;
@@ -161,17 +168,17 @@
   </section>
 
   <!---------------------------------------------------------------------- hero section --------------------------------------->
-  <section id="hero" class=" bg-cover bg-center w-full   " style="background-image: url(images/g.png);">
+  <section id="hero" class=" bg-cover bg-center w-full bg-fixed  " style="background-image: url(images/g.png);">
     <div class="flex justify-center items-center h-[100vh]">
       <div class="text-center " style="margin-top: -100px;">
         <h1 class="text-5xl font-bold text-[#013853] lg:text-6xl head mb-3 ">cancelUI</h1>
         <span class="text-lg mt-5 text-[#013853] lg:text-xl para">"Unleash Limitless Creativity With Zero Setup And <br>
           Endless Possibilities"</span>
         <div class="flex  justify-center space-x-3 mt-5">
-          <a
+          <a href="docs.html"
             class="px-4 py-2 card bg-[#333] rounded-full text-white cursor-pointer hover:scale-110 transform transition-transform duration-300 ">Get
             Started</a>
-          <a
+          <a href="docs.html#accord-content"
             class="px-4 py-2 card hover:bg-[#333]  border border-[#333] text-[#333] rounded-full hover:text-white cursor-pointer  hover:scale-110 transform transition-transform duration-300  ">View
             Components</a>
 
@@ -394,7 +401,7 @@
         </script>
       </div>
       <!-------------------------------------------------------- navbar code ------------------>
-      <div class="bg-[#f8f9fb] p-5  mt-5 "
+      <div class="bg-[#f8f9fb] p-5  mt-5 card "
         style="border: 2px solid transparent ;border-image: linear-gradient(to bottom, rgb(0, 204, 255), rgb(255, 72, 0))1 ;">
         <button id="btn5" class="text-orange-500 flex ml-auto " onclick="copy5()">Copy</button>
         <pre id="cmd5" class=" text-justify overflow-x-auto">
@@ -639,7 +646,7 @@
   <!----------------------------------------------------------------- footer ------------------------------------------------->
   <!-- footer -->
   <section>
-    <footer class=" bottom-0 left-0 w-full bg-[#edf5ff] text-gray-700 py-10 shadow-inner mt-20 card">
+    <footer class=" bottom-0 left-0 w-full bg-[#edf5ff] text-gray-700 py-10 shadow-inner mt-20 foot ">
       <div class="flex flex-col items-center text-center space-y-7">
         <div class="w-full max-w-md">
 
@@ -693,7 +700,7 @@
       } else {
         // Light mode
         darkMode.classList.remove("dark")
-        hero.style.backgroundImage = "url(g.png)"
+        hero.style.backgroundImage = "url(images/g.png)"
 
       }
     });
